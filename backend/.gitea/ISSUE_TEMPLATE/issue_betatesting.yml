@@ -1,0 +1,91 @@
+name: "Validation. Beta Testing Validation Report"
+description: "Validation of a tool or component based on summarized feedback from beta testing"
+title: "[VALIDATION] Beta Testing Report - Version {version}"
+labels: ["mgmt/validation"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Warning** Do not forget adding the version in the title.
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        # VALIDATION REPORT (Beta Testing)
+        ## Information
+    visible: [content]
+
+  - type: input
+    id: validator
+    attributes:
+      label: Validator
+      description: Username of the validator.
+      placeholder: e.g., @john.doe
+      regex: '^@[a-zA-Z]+\\.[a-zA-Z]+$'
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version Under Validation
+      description: Version of the tool being validated.
+      placeholder: e.g., 1.2.3b1
+      regex: '^\\d+\\.\\d+\\.\\d+b\\d+$'
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary of Beta Tester Feedback
+      description: Summarize the general outcome of all individual beta tester reports.
+      placeholder: |
+        e.g., 4 testers participated. 3 reported "Passed", 1 reported "Passed with issues". No critical bugs were found
+    validations:
+      required: true
+
+  - type: textarea
+    id: issues_summary
+    attributes:
+      label: Summary of Reported Issues
+      description: Mention any major bugs, enhancements, or feature suggestions that resulted from testing.
+      placeholder: |
+        e.g.,
+        - Bugs: #245: Save fails on Safari 
+        - Enhancements: #250: Add keyboard shortcuts
+        - New Features: #248: Suggestion for project-level export
+    validations:
+      required: false
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        ## Result
+    visible: [content]
+
+  - type: dropdown
+    id: final_result
+    attributes:
+      label: Validation Result
+      description: Select the outcome of the validation process based on beta testing.
+      options:
+        - Failed (Does not meet release criteria; requires further work)
+        - Passed with limitations (Acceptable for release, but known issues remain)
+        - Passed (Ready for release; all major concerns addressed)
+      default: 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes (optional)
+      description: Add any context or rationale for the validation result.
+      placeholder: |
+        e.g., Minor UI issues will be addressed in the next release (see #248, #250).
+    validations:
+      required: false

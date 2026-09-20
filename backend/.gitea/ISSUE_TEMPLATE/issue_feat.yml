@@ -1,0 +1,60 @@
+name: "Feedback. Feature Request"
+description: "Use this template for brand new feature requests"
+title: "[FEAT] Add short description of the feature here"
+labels: ["ct/feat"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Warning** Do not forget filling the title information.
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        # FEATURE REQUEST
+    visible: [content]
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the feature
+      description: What is the feature you’re requesting? Please explain the use case and how it adds value.
+      placeholder: |
+        e.g., I’d like to add a notification system to alert users when a task is overdue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Intended use case
+      description: Describe the user need or workflow this feature addresses.
+      placeholder: |
+        e.g., Users managing multiple projects often miss deadlines due to lack of real-time alerts.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested implementation (optional)
+      description: Any ideas on how it could be implemented?
+      placeholder: |
+        e.g., Add a background job that checks deadlines and sends email notifications.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Select the priority level for this feature.
+      options:
+        - Low (Not urgent, optional functionality)
+        - Medium (Valuable addition, improves user experience)
+        - High (Crucial functionality, unlocks major use cases)
+      default: 0
+    validations:
+      required: true

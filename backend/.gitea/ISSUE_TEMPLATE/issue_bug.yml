@@ -1,0 +1,71 @@
+name: "Feedback. Bug Report"
+description: "Use this template to report a bug"
+title: "[BUG] Add short description of the bug here"
+labels: ["ct/bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Warning** Do not forget filling the title information.
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        # BUG REPORT
+    visible: [content]
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What happened? Please describe the unexpected behavior.
+      placeholder: |
+        e.g., When I click on the Save button, nothing happens and no error is shown
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Provide clear steps to reproduce the bug.
+      placeholder: |
+        1. Go to the dashboard
+        2. Click on 'Save'
+        3. Nothing happens
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: |
+        e.g., I expected the form to be saved and a confirmation message to appear
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Any environment-related info that may affect the test outcome, such as OS, browser, device, or configuration.
+      placeholder: e.g., Windows 11, Chrome 122
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: Select the priority level for this bug.
+      options:
+        - Low (minor issue, no real impact)
+        - Medium (functional but inconvenient)
+        - High (blocks core functionality)
+      default: 0
+    validations:
+      required: true

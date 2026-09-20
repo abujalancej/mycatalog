@@ -1,0 +1,65 @@
+# macOS
+.DS_Store
+._*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Flask
+instance/
+.webassets-cache
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local secrets
+config.yaml
+*.local.yaml
+
+# Generated catalogue assets and scratch files
+covers/
+covers_originals/
+db/*.json
+db/*.sqlite*
+db/backups/
+!db/.gitkeep
+reports/*
+!reports/.gitkeep
+var/*
+!var/.gitkeep
+rejected_*.json
+request*.json
+* copy.json
+
+# Logs
+*.log
+logs/

@@ -1,0 +1,127 @@
+name: "Validation. Beta Tester Report"
+description: "Individual report used to collect findings and feedback from a beta testing session"
+title: "[VALIDATION] Beta Tester Feedback - Version {version} - {beta_tester_initials}"
+labels: ["mgmt/validation"]
+
+body:
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        # BETA TESTER REPORT
+        ## Information
+    visible: [content]
+
+  - type: input
+    id: beta_tester
+    attributes:
+      label: Beta Tester
+      description: Username of the beta tester.
+      placeholder: e.g., @john.doe
+      regex: '^@[a-zA-Z]+\\.[a-zA-Z]+$'
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version Under Validation
+      description: Version of the tool being validated.
+      placeholder: e.g., 1.2.3b1
+      regex: '^\\d+\\.\\d+\\.\\d+b\\d+$'
+    validations:
+      required: true
+
+  - type: input
+    id: beta_dates
+    attributes:
+      label: Beta Testing Period
+      description: Indicate the start and end dates of the beta testing phase.
+      placeholder: e.g., 2025-03-10 to 2025-03-17
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Platform, OS, or system setup where the validation was performed.
+      placeholder: e.g., Ubuntu 22.04, Firefox
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Validation Checklist
+      description: Please review and check all applicable items.
+      options:
+        - label: The tool covers the main points of the functional specification
+        - label: No unexpected crashes or major errors occurred
+        - label: The user interface behaves as expected 
+        - label: Inputs produce expected outputs
+        - label: Error messages are clear and helpful 
+        - label: Documentation or help texts are available and correct
+        - label: The tool performs correctly under typical use conditions
+        - label: No blocking issues were found during the test session
+
+  - type: textarea
+    id: bug_issues
+    attributes:
+      label: Bugs Reported
+      description: List links of any bug issues opened during beta testing.
+      placeholder: |
+        e.g., #234: UI crash when switching tabs
+    validations:
+      required: false
+
+  - type: textarea
+    id: new_features
+    attributes:
+      label: New Feature Requests
+      description: List links of any new feature request issues opened during beta testing.
+      placeholder: |
+        e.g., #240: Request for dark mode toggle
+    validations:
+      required: false
+
+  - type: textarea
+    id: enhancements
+    attributes:
+      label: Enhancement Requests
+      description: List links of any enhacement request issues opened during beta testing.
+      placeholder: |
+        e.g., #241: Improve form validation error messages
+    validations:
+      required: false
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        ## Outcome
+    visible: [content]
+  
+  - type: dropdown
+    id: result
+    attributes:
+      label: Beta Testing Outcome
+      description: Based on your experience during testing, how would you rate the release?
+      options:
+        - Failed (Not usable or critical bugs found)
+        - Passed with issues (Usable with limitations or known bugs)
+        - Passed (Stable and functioning as expected)
+      default: 1
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes (optional)
+      description: Add any context or rationale for the beta testing outcome.
+      placeholder: |
+        e.g., Tool performed well overall; a few suggestions added as enhancements (see #248, #250).
+    validations:
+      required: false

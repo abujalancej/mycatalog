@@ -1,0 +1,21 @@
+tmdb:
+  api_key: "YOUR_TMDB_API_KEY"
+  base_url: "https://api.themoviedb.org/3"
+
+discogs:
+  token: "YOUR_DISCOGS_TOKEN"
+  base_url: "https://api.discogs.com"
+
+google_books:
+  api_key: ""
+  base_url: "https://www.googleapis.com/books/v1"
+
+open_library:
+  base_url: "https://openlibrary.org"
+
+# TODO: video game catalogue support is parked until the future provider and
+# schema are selected. Do not configure RAWG for the current active workflow.
+
+storage:
+  database_path: "./db/catalog.sqlite3"
+  # TODO: games_path will be reintroduced with the future game catalogue schema.

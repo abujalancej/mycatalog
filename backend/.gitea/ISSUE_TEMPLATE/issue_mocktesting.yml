@@ -1,0 +1,135 @@
+name: "Validation. Mock Testing Validation Report"
+description: "Validation of a tool using golden samples with predefined inputs and expected outputs"
+title: "[VALIDATION] Mock Testing Report - Version {version}"
+labels: ["mgmt/validation"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Warning** Do not forget adding the version in the title.
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        # VALIDATION REPORT (Mock Testing)
+        ## Information
+    visible: [content]
+
+  - type: input
+    id: validator
+    attributes:
+      label: Validator
+      description: Username of the validator.
+      placeholder: e.g., @john.doe
+      regex: '^@[a-zA-Z]+\\.[a-zA-Z]+$'
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version Under Validation
+      description: Version of the tool being validated.
+      placeholder: e.g., 1.2.3
+      regex: '^\\d+\\.\\d+\\.\\d+$'
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Validation Equipment
+      description: Specify the validated equipment used to compare the results on the golden sample with the developed tool.
+      placeholder: e.g., Inspector 4.12
+    validations:
+      required: true
+
+  - type: textarea
+    id: golden_sample
+    attributes:
+      label: Golden Samples and Test Cases
+      description: List the golden samples used and describe the test case(s), including inputs and expected outputs.
+      placeholder: |
+        e.g., Sample 1 (ICC Card A): The tool shall correctly capture all APDU transactions, identify the command-response pairs, and store them in structured format
+      validations:
+        required: true
+
+  - type: textarea
+    id: test_scope
+    attributes:
+      label: Scope of Testing
+      description: Describe which parts of the tool were tested and any limitations or areas not covered.
+      placeholder: |
+        e.g., Validated parsing, transformation, and export modules using the golden samples. UI interactions and performance tests were not covered in this session
+      validations:
+        required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Validation Checklist
+      description: Please review and check all applicable items.
+      options:
+        - label: The tool covers the main points of the functional specification
+        - label: No unexpected crashes or major errors occurred
+        - label: The user interface behaves as expected 
+        - label: Inputs produce expected outputs
+        - label: Error messages are clear and helpful 
+        - label: Documentation or help texts are available and correct
+        - label: The tool performs correctly under typical use conditions
+        - label: No blocking issues were found during the test session
+
+  - type: textarea
+    id: bug_issues
+    attributes:
+      label: Residual Bugs Review
+      description: Review existing bug reports related to this version. List each issue and comment on its current status (e.g., SOLVED, NOT SOLVED or NOT COVERED).
+      placeholder: |
+        e.g., 
+        - #234: UI crash when switching tabs → SOLVED
+        - #241: Incorrect APDU decoding for malformed input → NOT SOLVED
+        - #248: Tooltip not displaying → NOT COVERED
+    validations:
+      required: false
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Location of Validation Evidence
+      description: Provide links or paths to evidence such as test reports, screenshots, logs, or reviewed code.
+      placeholder: |
+        e.g., Output file at /mock_tests/output_03.csv  
+    validations:
+      required: true
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        ## Result
+    visible: [content]
+
+  - type: dropdown
+    id: validation_result
+    attributes:
+      label: Validation Result
+      description: Select the overall result of this validation.
+      options:
+        - Failed (Validation did not pass; issues remain)
+        - Passed with limitations (Works, but with known constraints or partial coverage)
+        - Passed (Fully validated; no issues identified)
+      default: 2
+    validations:
+      required: true
+    
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes (optional)
+      description: Add any context or rationale for the validation result.
+      placeholder: |
+        e.g., Minor UI issues will be fixed in the next release (see #248, #250).
+    validations:
+      required: false

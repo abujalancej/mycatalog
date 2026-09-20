@@ -12,10 +12,6 @@ backend/reports/
 backend/var/
 db/
 
-# Application components are maintained in their own repositories
-/backend/
-/frontend/
-
 # Local secrets and environment overrides
 .env
 .env.*

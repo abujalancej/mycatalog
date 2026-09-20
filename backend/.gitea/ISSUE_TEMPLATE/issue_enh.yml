@@ -1,0 +1,50 @@
+name: "Feedback. Enhancement Request"
+description: "Use this template for improvements to existing features (not for brand new features)"
+title: "[ENH] Add short description of the enhancement here"
+labels: ["ct/enh"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Warning** Do not forget filling the title information.
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        # ENHANCEMENT REQUEST
+    visible: [content]
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Enhancement Description
+      description: Which feature are you suggesting to improve? 
+      placeholder: |
+        e.g., I'd like to improve the existing dashboard by adding a filter to sort projects by status
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested implementation (optional)
+      description: Do you have any thoughts on how this could be implemented?
+      placeholder: |
+        e.g., Add a new dropdown in the filter section with options for status (Active, Completed, On Hold)
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Select the priority level for this enhancement.
+      options:
+        - Low (Nice to have, minimal impact)
+        - Medium (Useful improvement, moderate impact)
+        - High (Important for usability or efficiency)
+      default: 0
+    validations:
+      required: true

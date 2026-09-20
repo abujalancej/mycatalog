@@ -1,0 +1,103 @@
+name: "Validation. Referenced Validation Report"
+description: "Validation of a tool based on its integration and coverage within the validation of another tool"
+title: "[VALIDATION] Referenced Validation - Version {version}"
+labels: ["mgmt/validation"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Warning** Do not forget adding the version in the title.
+
+  - type: markdown
+    attributes:
+      value: |
+        > **Important** This validation method shall only be used when testing a component whose functionality is implicitly covered by the validation of an equipment or management tool that integrates it.  
+        > **If the component requires isolated validation, this method is not applicable.**
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        # VALIDATION REPORT (Referenced Validation)
+        ## Information
+    visible: [content]
+
+  - type: input
+    id: validator
+    attributes:
+      label: Validator
+      description: Username of the validator.
+      placeholder: e.g., @john.doe
+      regex: '^@[a-zA-Z]+\\.[a-zA-Z]+$'
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version Under Validation
+      description: Version of the component being validated.
+      placeholder: e.g., 1.2.3
+      regex: '^\\d+\\.\\d+\\.\\d+$'
+    validations:
+      required: true
+
+  - type: input
+    id: component
+    attributes:
+      label: Referenced Equipment or Management Tool and Version
+      description: Name and version of the referenced equipment or management tool where the validation was performed.
+      placeholder: e.g., signal-analyzer v2.1.0b1
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context / Notes
+      description: Explain briefly how this component is involved in the referenced validation.
+      placeholder: |
+        e.g., This parser is used by the acquisition module of signal-analyzer
+    validations:
+      required: true
+
+  - type: input
+    id: reference_issue
+    attributes:
+      label: Reference Validation Issue
+      description: Paste the link of the validation that implicitly includes this component.
+      placeholder: e.g., https://github.com/your-org/repo/issues/123
+      regex: '^https://.*$'
+    validations:
+      required: true
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        ## Result
+    visible: [content]
+
+  - type: dropdown
+    id: validation_result
+    attributes:
+      label: Validation Result
+      description: Select the overall result of this validation.
+      options:
+        - Failed (Validation did not pass; issues remain)
+        - Passed with limitations (Works, but with known constraints or partial coverage)
+        - Passed (Fully validated; no issues identified)
+      default: 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes (optional)
+      description: Add any context or rationale for the validation result.
+      placeholder: |
+        e.g., Minor UI issues will be fixed in the next release (see #248, #250).
+    validations:
+      required: false

@@ -1,0 +1,109 @@
+name: "Validation. Self-Validation Report"
+description: "Validation performed directly by the developer"
+title: "[VALIDATION] Self-Validation Report - Version {version}"
+labels: ["mgmt/validation"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > **Warning** Do not forget adding the version in the title.
+
+  - type: markdown
+    attributes:
+      value: |
+        > **Important** This template is for self-validation. For **high-priority bug fixes**, **new features**, or **medium/high-priority enhancements**, validation **must be done via mock testing or beta testing**.
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        # VALIDATION REPORT (Self-Validation)
+        ## Information
+    visible: [content]
+
+  - type: input
+    id: validator
+    attributes:
+      label: Validator
+      description: Username of the validator.
+      placeholder: e.g., @john.doe
+      regex: '^@[a-zA-Z]+\\.[a-zA-Z]+$'
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version Under Validation
+      description: Version of the tool being validated.
+      placeholder: e.g., 1.2.3
+      regex: '^\\d+\\.\\d+\\.\\d+$'
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: methods
+    attributes:
+      label: Validation Methods Used
+      description: |
+        Select the methods used to validate this version. 
+      options:
+        - label: Unit tests written or updated (Verified expected behavior at code level)
+        - label: Existing test suite passed (Confirmed no regressions)
+        - label: Manual testing performed (Clicked through critical flows or edge cases)
+        - label: Static code analysis / linters (Code checked for style or safety)
+        - label: Peer-reviewed via code review (Reviewed by another developer)
+        - label: Logs or metrics reviewed (Observed expected outcomes during execution)
+        - label: Other (specify below)
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Information About Validation Methods (optional)
+      description: Provide any extra details about how the validation was performed, such as who did the peer review, how manual testing was carried out, or tools used during validation.
+      placeholder: |
+        e.g., Peer-reviewed by @jane.doe  
+    validations:
+      required: false
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Location of Validation Evidence
+      description: Provide links or paths to evidence such as test reports, screenshots, logs, or reviewed code.
+      placeholder: |
+        e.g., Log file at /logs/validation_run_2025-03-26.txt
+      value: ""
+    validations:
+      required: true
+
+  # visible once the issue has been created
+  - type: markdown
+    attributes:
+      value: |
+        ## Result
+    visible: [content]
+
+  - type: dropdown
+    id: validation_result
+    attributes:
+      label: Validation Result
+      description: Select the overall result of this validation.
+      options:
+        - Failed (Validation did not pass; issues remain)
+        - Passed with limitations (Works, but with known constraints or partial coverage)
+        - Passed (Fully validated; no issues identified)
+      default: 2
+    validations:
+      required: true
+    
+  - type: textarea
+    id: notes2
+    attributes:
+      label: Additional Notes (optional)
+      description: Add any context or rationale for the validation result.
+      placeholder: |
+        e.g., Minor UI issues will be fixed in the next release (see #248, #250).
+    validations:
+      required: false
