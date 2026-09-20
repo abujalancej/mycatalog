@@ -1,13 +1,15 @@
 # MyCatalog
 
+**English** · [Español](README.es.md) · [Català](README.ca.md)
+
 **Local-first personal media catalogue**
 
 <p align="center">
   <img src="electron/assets/mycatalog-icon.png" alt="MyCatalog logo" width="220">
 </p>
 
-MyCatalog `0.1.0` is a local desktop application for managing a personal
-collection of music, movies, TV shows, and books.
+MyCatalog is a local desktop application for managing a personal collection of
+music, movies, TV shows, and books.
 
 The catalogue stays on the local computer. SQLite stores the collection,
 downloaded artwork remains in the local covers directory, and external APIs
@@ -261,7 +263,9 @@ mycatalog/
 ├── frontend/                # Next.js renderer and UI components
 ├── electron/                # Electron main process and application assets
 ├── package.json             # Desktop scripts and Electron dependency
-└── README.md                # Project documentation
+├── README.md                # English project documentation
+├── README.es.md             # Spanish project documentation
+└── README.ca.md             # Catalan project documentation
 ```
 
 ## Available scripts

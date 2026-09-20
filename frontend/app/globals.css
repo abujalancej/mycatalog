@@ -1365,6 +1365,13 @@ body {
   font-size: 0.83rem;
 }
 
+.app-version-value {
+  color: var(--text) !important;
+  font-size: 1.15rem !important;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
 .switch-control {
   display: block;
   width: 100%;

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useRef, useState, type ChangeEvent, type FormEvent, type ReactNode } from "react";
+import appPackage from "../package.json";
 
 import GlitchText from "./GlitchText";
 import {
@@ -25,6 +26,8 @@ import {
 } from "@/lib/music-options";
 import { normalizeMusicGenres } from "@/lib/music-utils";
 import type { BookItem, BookSearchResult, MovieItem, MusicItem } from "@/lib/types";
+
+const APP_VERSION = appPackage.version;
 
 type Props = {
   initialMusic: MusicItem[];
@@ -697,6 +700,7 @@ const TEXT = {
     actionConfirmed: "Acción confirmada",
     settingsTitle: "Configuración",
     settingsSubtitle: "Modo editor y configuración",
+    applicationVersion: "Versión de la aplicación",
     language: "Language (UI)",
     visibleSections: "Secciones visibles",
     tabOrder: "Orden de pestañas",
@@ -897,6 +901,7 @@ const TEXT = {
     actionConfirmed: "Acció confirmada",
     settingsTitle: "Configuració",
     settingsSubtitle: "Mode editor i configuració",
+    applicationVersion: "Versió de l'aplicació",
     language: "Language (UI)",
     visibleSections: "Seccions visibles",
     tabOrder: "Ordre de pestanyes",
@@ -1097,6 +1102,7 @@ const TEXT = {
     actionConfirmed: "Action confirmed",
     settingsTitle: "Settings",
     settingsSubtitle: "Editor mode and configuration",
+    applicationVersion: "Application version",
     language: "Language (UI)",
     visibleSections: "Visible sections",
     tabOrder: "Tab order",
@@ -1381,7 +1387,6 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
 
   useEffect(() => {
     const savedLang = window.localStorage.getItem("catalog_lang") as Lang | null;
-    const savedEditorMode = window.localStorage.getItem("catalog_editor") === "1";
     const savedSectionVisibility = parseSectionVisibility(window.localStorage.getItem("catalog_visible_sections"));
     const savedTabOrder = parseTabOrder(window.localStorage.getItem("catalog_tab_order"));
     const urlTab = new URLSearchParams(window.location.search).get("tab");
@@ -1399,7 +1404,8 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
       setTab(savedTabOrder.find((entry) => savedSectionVisibility[entry]) ?? "music");
     }
 
-    setEditorMode(savedEditorMode);
+    window.localStorage.removeItem("catalog_editor");
+    setEditorMode(false);
     setSectionVisibilityReady(true);
     setUrlStateReady(true);
   }, []);
@@ -1425,10 +1431,6 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
   useEffect(() => {
     window.localStorage.setItem("catalog_lang", lang);
   }, [lang]);
-
-  useEffect(() => {
-    window.localStorage.setItem("catalog_editor", editorMode ? "1" : "0");
-  }, [editorMode]);
 
   useEffect(() => {
     if (!sectionVisibilityReady) {
@@ -3399,6 +3401,11 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                 <button type="button" className={lang === "es" ? "active" : ""} onClick={() => setLang("es")} disabled={!editorMode}>ES</button>
                 <button type="button" className={lang === "cat" ? "active" : ""} onClick={() => setLang("cat")} disabled={!editorMode}>CAT</button>
               </div>
+            </div>
+
+            <div className="pref-card">
+              <h3>{t.applicationVersion}</h3>
+              <p className="app-version-value">{APP_VERSION}</p>
             </div>
 
             <div className="pref-card pref-card-wide">
