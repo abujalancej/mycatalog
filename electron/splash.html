@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; img-src file: data:; style-src 'unsafe-inline'"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MyCatalog</title>
+    <style>
+      :root {
+        color-scheme: light;
+        background: #f6f6f4;
+        font-family: "Helvetica Neue", "Avenir Next", "Segoe UI", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: #f6f6f4;
+      }
+
+      main {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+      }
+
+      .glitch {
+        position: relative;
+        display: inline-block;
+        color: #20252b;
+        font-size: clamp(2.2rem, 7vw, 4rem);
+        font-weight: 900;
+        line-height: 1.05;
+        letter-spacing: 0.005em;
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      .splash-lockup {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+
+      .splash-icon {
+        width: clamp(2.65rem, 6.8vw, 4.8rem);
+        height: clamp(2.65rem, 6.8vw, 4.8rem);
+        flex: 0 0 auto;
+        object-fit: contain;
+      }
+
+      .glitch::before,
+      .glitch::after {
+        content: attr(data-text);
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        color: #20252b;
+        background: #f6f6f4;
+        clip-path: inset(0 0 76% 0);
+      }
+
+      .glitch::before {
+        left: -3px;
+        text-shadow: 3px 0 rgba(57, 209, 255, 0.55);
+        animation: glitch 3.6s infinite steps(1, end) alternate-reverse;
+      }
+
+      .glitch::after {
+        left: 3px;
+        text-shadow: -3px 0 rgba(255, 71, 87, 0.55);
+        animation: glitch 5.4s infinite steps(1, end) alternate;
+      }
+
+      @keyframes glitch {
+        0%, 100% { clip-path: inset(0 0 78% 0); }
+        12% { clip-path: inset(22% 0 44% 0); }
+        25% { clip-path: inset(66% 0 6% 0); }
+        38% { clip-path: inset(30% 0 34% 0); }
+        50% { clip-path: inset(58% 0 10% 0); }
+        62% { clip-path: inset(18% 0 52% 0); }
+        75% { clip-path: inset(42% 0 22% 0); }
+        88% { clip-path: inset(12% 0 58% 0); }
+      }
+    </style>
+  </head>
+  <body>
+    <main role="status" aria-label="Loading MyCatalog">
+      <div class="splash-lockup">
+        <img class="splash-icon" src="../frontend/public/mycatalog-loading-logo.png" alt="" />
+        <div class="glitch" data-text="MyCatalog">MyCatalog</div>
+      </div>
+    </main>
+  </body>
+</html>

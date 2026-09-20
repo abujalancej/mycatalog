@@ -1,0 +1,28 @@
+# Desktop / Electron
+node_modules/
+dist/
+release/
+*.log
+
+# Private local catalogue data — keep on this machine only
+backend/config.yaml
+backend/covers/
+backend/db/
+backend/reports/
+backend/var/
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Local OS/editor files
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,15 @@
+{
+  "name": "mycatalog-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Desktop application for MyCatalog",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "node scripts/start-electron.js",
+    "build:frontend": "npm --prefix frontend run build",
+    "lint:frontend": "npm --prefix frontend run lint"
+  },
+  "devDependencies": {
+    "electron": "^38.0.0"
+  }
+}
