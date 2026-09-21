@@ -3512,13 +3512,6 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                     </div>
                   ) : null}
 
-                  <div className="inconsistency-summary">
-                    <span>{inconsistencyReport.scanned} scanned</span>
-                    <span>{filteredInconsistencyIssues.length} / {inconsistencyReport.issueCount} issues</span>
-                    <span>{filteredInconsistencyIssues.filter((issue) => issue.severity === "error").length} errors</span>
-                    <span>{filteredInconsistencyIssues.filter((issue) => issue.severity === "warning").length} warnings</span>
-                  </div>
-
                   {filteredInconsistencyIssues.length ? (
                     <div className="issue-list">
                       {filteredInconsistencyIssues.map((issue, index) => (
