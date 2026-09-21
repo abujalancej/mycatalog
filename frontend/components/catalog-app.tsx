@@ -2929,7 +2929,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
         </div>
 
         <div className="topbar-actions">
-          {area === "catalog" && editorMode ? (
+          {editorMode ? (
             <span className="editor-mode-badge" role="status">
               {t.editorMode}
             </span>
