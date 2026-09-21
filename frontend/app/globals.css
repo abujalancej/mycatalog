@@ -854,6 +854,13 @@ body {
   pointer-events: none;
 }
 
+.confirm-modal-overlay .fa-trash,
+.confirm-modal-overlay .fa-trash-can,
+.details-modal-overlay .fa-trash,
+.details-modal-overlay .fa-trash-can {
+  color: var(--danger);
+}
+
 .icon-button:not(:disabled):hover,
 .file-button.icon-button:hover,
 .details-close:hover {
