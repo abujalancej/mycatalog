@@ -694,7 +694,9 @@ const TEXT = {
     series: "Serie",
     delete: "Eliminar",
     cancel: "Cancelar",
-    confirmDelete: "Confirmar eliminación",
+    deleteKindMusic: "MÚSICA",
+    deleteKindMovie: "PELÍCULA",
+    deleteKindBook: "LIBRO",
     deleteItem: "Eliminar elemento",
     deletePrompt: "Esta acción es irreversible y borrará el elemento de la base de datos.",
     deleteMissing: "El elemento no existía en la base de datos. Se ha quitado de la vista.",
@@ -896,7 +898,9 @@ const TEXT = {
     series: "Sèrie",
     delete: "Eliminar",
     cancel: "Cancel·lar",
-    confirmDelete: "Confirmar eliminació",
+    deleteKindMusic: "MÚSICA",
+    deleteKindMovie: "PEL·LÍCULA",
+    deleteKindBook: "LLIBRE",
     deleteItem: "Eliminar element",
     deletePrompt: "Aquesta acció és irreversible i esborrarà l'element de la base de dades.",
     deleteMissing: "L'element no existia a la base de dades. S'ha tret de la vista.",
@@ -1098,7 +1102,9 @@ const TEXT = {
     series: "Series",
     delete: "Delete",
     cancel: "Cancel",
-    confirmDelete: "Confirm delete",
+    deleteKindMusic: "MUSIC",
+    deleteKindMovie: "MOVIE",
+    deleteKindBook: "BOOK",
     deleteItem: "Delete item",
     deletePrompt: "This action is irreversible and will delete the item from the database.",
     deleteMissing: "Item was not found in the database. Removed from the view.",
@@ -1280,6 +1286,11 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
   }, [inconsistencyKindFilter, inconsistencyReport, inconsistencySearch, inconsistencySeverityFilter]);
   const databaseConfirmationKeyword = pendingDatabaseAction?.kind === "delete" ? t.databaseDeleteKeyword : t.databaseRestoreKeyword;
   const databaseConfirmationMatches = databaseConfirmation.trim().toUpperCase() === databaseConfirmationKeyword;
+  const deleteTargetKind = pendingDelete?.kind === "music"
+    ? t.deleteKindMusic
+    : pendingDelete?.kind === "movies"
+      ? t.deleteKindMovie
+      : t.deleteKindBook;
   const isLoadingModalOpen = !isBooting && Boolean(
     tabImagesLoading
     || detailsImageLoading
@@ -2440,7 +2451,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
 
     removeDeletedItem(kind, id);
     setPendingDelete(null);
-    showActionNotice(t.confirmDelete);
+    showActionNotice(t.deleteItem);
   }
 
   async function saveMusicChanges(event: FormEvent<HTMLFormElement>) {
@@ -3623,6 +3634,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
             </header>
 
             <div className="database-confirm-body">
+              <strong className="delete-confirm-target">{deleteTargetKind} - {pendingDelete?.title}</strong>
               <div className="database-warning-box">
                 <p>{pendingDatabaseAction.kind === "delete" ? t.databaseDeleteWarning : t.databaseRestoreWarning}</p>
               </div>
