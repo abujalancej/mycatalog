@@ -739,7 +739,6 @@ const TEXT = {
     databaseDeleteWarning: "Esta acción vaciará toda la base de datos y borrará las imágenes locales actuales.",
     databaseConfirmInstruction: "Escribe {keyword} para confirmar.",
     databaseConfirmInputLabel: "Confirmación",
-    databaseConfirmPlaceholder: "Escribe la palabra de confirmación",
     databaseConfirmButton: "Confirmar operación",
     databaseDeleteConfirmButton: "Borrar",
     databaseCancelButton: "Cancelar",
@@ -940,7 +939,6 @@ const TEXT = {
     databaseDeleteWarning: "Aquesta acció buidarà tota la base de dades i esborrarà les imatges locals actuals.",
     databaseConfirmInstruction: "Escriu {keyword} per confirmar.",
     databaseConfirmInputLabel: "Confirmació",
-    databaseConfirmPlaceholder: "Escriu la paraula de confirmació",
     databaseConfirmButton: "Confirmar operació",
     databaseDeleteConfirmButton: "Esborrar",
     databaseCancelButton: "Cancel·lar",
@@ -1141,7 +1139,6 @@ const TEXT = {
     databaseDeleteWarning: "This will clear the entire database and delete the current local artwork.",
     databaseConfirmInstruction: "Type {keyword} to confirm.",
     databaseConfirmInputLabel: "Confirmation",
-    databaseConfirmPlaceholder: "Type the confirmation word",
     databaseConfirmButton: "Confirm operation",
     databaseDeleteConfirmButton: "Delete",
     databaseCancelButton: "Cancel",
@@ -3626,14 +3623,13 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
               <div className="database-warning-box">
                 <p>{pendingDatabaseAction.kind === "delete" ? t.databaseDeleteWarning : t.databaseRestoreWarning}</p>
               </div>
-              <p className="database-confirm-instruction">{t.databaseConfirmInstruction.replace("{keyword}", databaseConfirmationKeyword)}</p>
               <label className="database-confirm-label">
                 <span>{t.databaseConfirmInputLabel}</span>
                 <input
                   type="text"
                   value={databaseConfirmation}
                   onChange={(event) => setDatabaseConfirmation(event.target.value)}
-                  placeholder={t.databaseConfirmPlaceholder}
+                  placeholder={t.databaseConfirmInstruction.replace("{keyword}", databaseConfirmationKeyword)}
                   autoFocus
                   autoComplete="off"
                   spellCheck={false}

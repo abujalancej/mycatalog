@@ -2044,7 +2044,7 @@ body {
   gap: 0.3rem;
   color: var(--muted);
   font-size: 0.86rem;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .database-confirm-label input {
@@ -2068,11 +2068,6 @@ body {
   color: var(--muted);
   font-weight: 400;
   opacity: 1;
-}
-
-.database-confirm-instruction {
-  font-size: 0.86rem;
-  font-weight: 400;
 }
 
 .database-confirm-actions {
