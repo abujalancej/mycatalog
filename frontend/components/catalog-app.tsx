@@ -698,6 +698,7 @@ const TEXT = {
     deleteKindMovie: "PELÍCULA",
     deleteKindBook: "LIBRO",
     deleteItem: "Eliminar elemento",
+    confirmDeletion: "Confirmar eliminación",
     deletePrompt: "Esta acción es irreversible y borrará el elemento de la base de datos.",
     deleteMissing: "El elemento no existía en la base de datos. Se ha quitado de la vista.",
     actionConfirmed: "Acción confirmada",
@@ -902,6 +903,7 @@ const TEXT = {
     deleteKindMovie: "PEL·LÍCULA",
     deleteKindBook: "LLIBRE",
     deleteItem: "Eliminar element",
+    confirmDeletion: "Confirmar eliminació",
     deletePrompt: "Aquesta acció és irreversible i esborrarà l'element de la base de dades.",
     deleteMissing: "L'element no existia a la base de dades. S'ha tret de la vista.",
     actionConfirmed: "Acció confirmada",
@@ -1106,6 +1108,7 @@ const TEXT = {
     deleteKindMovie: "MOVIE",
     deleteKindBook: "BOOK",
     deleteItem: "Delete item",
+    confirmDeletion: "Confirm deletion",
     deletePrompt: "This action is irreversible and will delete the item from the database.",
     deleteMissing: "Item was not found in the database. Removed from the view.",
     actionConfirmed: "Action confirmed",
@@ -3714,8 +3717,8 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
         <div className="confirm-modal-overlay" onClick={() => setPendingDelete(null)}>
           <section className="confirm-modal database-confirm-modal is-danger delete-confirm-modal" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="confirm-delete-title">
             <header className="database-confirm-header">
-              <p className="database-confirm-eyebrow">{t.delete}</p>
-              <h2 id="confirm-delete-title">{t.deleteItem}</h2>
+              <p className="database-confirm-eyebrow">{t.deleteItem}</p>
+              <h2 id="confirm-delete-title">{t.confirmDeletion}</h2>
             </header>
 
             <div className="database-confirm-body">
