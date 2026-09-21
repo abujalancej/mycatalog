@@ -854,11 +854,11 @@ body {
   pointer-events: none;
 }
 
-.confirm-modal-overlay .fa-trash,
-.confirm-modal-overlay .fa-trash-can,
-.details-modal-overlay .fa-trash,
-.details-modal-overlay .fa-trash-can {
-  color: var(--danger);
+.confirm-modal-overlay .danger .fa-trash,
+.confirm-modal-overlay .danger .fa-trash-can,
+.details-modal-overlay .danger .fa-trash,
+.details-modal-overlay .danger .fa-trash-can {
+  color: #fff;
 }
 
 .icon-button:not(:disabled):hover,

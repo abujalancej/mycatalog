@@ -3823,7 +3823,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                             <input className="track-edit-pos" placeholder="#" value={track.pos} onChange={(event) => updateMusicTrack(index, "pos", event.target.value)} />
                             <input className="track-edit-title" placeholder={t.title} value={track.title} onChange={(event) => updateMusicTrack(index, "title", event.target.value)} />
                             <input className="track-edit-artists" placeholder={t.artists} value={track.artists} onChange={(event) => updateMusicTrack(index, "artists", event.target.value)} />
-                            <button type="button" className="mini clear-external icon-button" onClick={() => removeMusicTrack(index)} aria-label={t.delete} title={t.delete}>
+                            <button type="button" className="danger icon-button" onClick={() => removeMusicTrack(index)} aria-label={t.delete} title={t.delete}>
                               <i className="fa-solid fa-trash" aria-hidden="true" />
                             </button>
                           </div>
