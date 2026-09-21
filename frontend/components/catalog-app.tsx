@@ -3478,35 +3478,39 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                         </select>
                       </label>
                       <label className="inconsistency-filter-control inconsistency-search-control">
-                        <span>{t.inconsistencyFilterSearch}</span>
                         <input
                           className="search"
                           type="search"
                           value={inconsistencySearch}
                           onChange={(event) => setInconsistencySearch(event.target.value)}
                           placeholder={t.inconsistencyFilterSearch}
+                          aria-label={t.inconsistencyFilterSearch}
                         />
                       </label>
                       <div className="inconsistency-filter-actions">
                         <button
                           type="button"
-                          className="clear-external"
+                          className="icon-button clear-external"
                           onClick={() => {
                             setInconsistencyKindFilter("all");
                             setInconsistencySeverityFilter("all");
                             setInconsistencySearch("");
                           }}
                           disabled={inconsistencyKindFilter === "all" && inconsistencySeverityFilter === "all" && !inconsistencySearch}
+                          aria-label={t.inconsistencyFilterClear}
+                          title={t.inconsistencyFilterClear}
                         >
-                          {t.inconsistencyFilterClear}
+                          <i className="fa-solid fa-filter-circle-xmark" aria-hidden="true" />
                         </button>
                         <button
                           type="button"
-                          className="primary"
+                          className="primary icon-button"
                           onClick={downloadInconsistencyList}
                           disabled={!filteredInconsistencyIssues.length}
+                          aria-label={t.inconsistencyDownload}
+                          title={t.inconsistencyDownload}
                         >
-                          {t.inconsistencyDownload}
+                          <i className="fa-solid fa-download" aria-hidden="true" />
                         </button>
                       </div>
                     </div>
