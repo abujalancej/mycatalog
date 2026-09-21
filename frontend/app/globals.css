@@ -1987,27 +1987,56 @@ body {
 }
 
 .database-confirm-modal {
-  width: min(500px, 100%);
+  width: min(520px, 100%);
+  padding: 0;
+  overflow: hidden;
+  border-radius: 18px;
+  gap: 0;
+  box-shadow: 0 28px 90px rgba(15, 16, 18, 0.3);
+}
+
+.database-confirm-header {
+  padding: 1.2rem 1.3rem 1.1rem;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(135deg, #ffffff 0%, #f6f8fa 100%);
+}
+
+.database-confirm-eyebrow {
+  margin: 0 0 0.16rem !important;
+  color: var(--muted) !important;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.database-confirm-header h2 {
+  font-size: 1.16rem;
+}
+
+.database-confirm-body {
+  display: grid;
+  gap: 0.85rem;
+  padding: 1.15rem 1.3rem 1.3rem;
 }
 
 .database-warning-box {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.65rem;
-  align-items: start;
-  border: 1px solid rgba(185, 64, 64, 0.3);
-  border-radius: 10px;
-  background: rgba(185, 64, 64, 0.07);
-  padding: 0.75rem;
-  color: var(--danger);
+  border: 1px solid rgba(39, 118, 160, 0.23);
+  border-radius: 12px;
+  background: rgba(39, 118, 160, 0.06);
+  padding: 0.82rem 0.9rem;
 }
 
 .database-warning-box p {
   color: var(--ink);
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
-.database-warning-box i {
-  padding-top: 0.12rem;
+.database-confirm-modal.is-danger .database-warning-box {
+  border-color: rgba(185, 64, 64, 0.28);
+  background: rgba(185, 64, 64, 0.065);
 }
 
 .database-confirm-label {
@@ -2020,17 +2049,38 @@ body {
 
 .database-confirm-label input {
   width: 100%;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-soft);
+  min-height: 2.55rem;
+  border: 1px solid #cfd5dc;
+  border-radius: 10px;
+  background: #fff;
   color: var(--ink);
-  padding: 0.55rem 0.62rem;
+  padding: 0.6rem 0.72rem;
   font: inherit;
+}
+
+.database-confirm-label input:focus {
+  border-color: #2776a0;
+  outline: 3px solid rgba(39, 118, 160, 0.14);
+}
+
+.database-confirm-instruction {
+  font-size: 0.88rem;
+}
+
+.database-confirm-actions {
+  align-items: center;
+  margin-top: 0.15rem;
+  padding-top: 0.15rem;
+}
+
+.database-cancel-button {
+  min-height: 2.35rem;
+  padding: 0 0.95rem;
 }
 
 .database-confirm-button {
   width: auto;
-  min-width: 9.5rem;
+  min-width: 10.5rem;
 }
 
 .confirm-target {
@@ -2850,5 +2900,15 @@ body {
 @media (max-width: 480px) {
   .filter-group-controls {
     grid-template-columns: 1fr;
+  }
+
+  .database-confirm-actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .database-confirm-button,
+  .database-cancel-button {
+    width: 100%;
   }
 }

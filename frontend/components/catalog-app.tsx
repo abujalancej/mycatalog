@@ -3611,37 +3611,44 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
 
       {pendingDatabaseAction ? (
         <div className="confirm-modal-overlay" onClick={cancelDatabaseAction}>
-          <section className="confirm-modal database-confirm-modal" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="database-confirm-title">
-            <h2 id="database-confirm-title">{t.databaseConfirmTitle}</h2>
-            <div className="database-warning-box">
-              <i className="fa-solid fa-triangle-exclamation" aria-hidden="true" />
-              <p>{pendingDatabaseAction.kind === "delete" ? t.databaseDeleteWarning : t.databaseRestoreWarning}</p>
-            </div>
-            <p>{t.databaseConfirmInstruction.replace("{keyword}", databaseConfirmationKeyword)}</p>
-            <label className="database-confirm-label">
-              <span>{t.databaseConfirmInputLabel}</span>
-              <input
-                type="text"
-                value={databaseConfirmation}
-                onChange={(event) => setDatabaseConfirmation(event.target.value)}
-                placeholder={t.databaseConfirmPlaceholder}
-                autoFocus
-                autoComplete="off"
-                spellCheck={false}
-              />
-            </label>
-            <div className="confirm-actions">
-              <button type="button" className="mini clear-external" onClick={cancelDatabaseAction} disabled={databaseLoading}>
-                {t.databaseCancelButton}
-              </button>
-              <button
-                type="button"
-                className={pendingDatabaseAction.kind === "delete" ? "danger settings-save-button database-confirm-button" : "primary settings-save-button database-confirm-button"}
-                onClick={() => void confirmDatabaseAction()}
-                disabled={!databaseConfirmationMatches || databaseLoading}
-              >
-                {t.databaseConfirmButton}
-              </button>
+          <section className={`confirm-modal database-confirm-modal ${pendingDatabaseAction.kind === "delete" ? "is-danger" : "is-restore"}`} onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="database-confirm-title">
+            <header className="database-confirm-header">
+              <div>
+                <p className="database-confirm-eyebrow">{pendingDatabaseAction.kind === "delete" ? t.deleteDatabase : t.uploadDatabase}</p>
+                <h2 id="database-confirm-title">{t.databaseConfirmTitle}</h2>
+              </div>
+            </header>
+
+            <div className="database-confirm-body">
+              <div className="database-warning-box">
+                <p>{pendingDatabaseAction.kind === "delete" ? t.databaseDeleteWarning : t.databaseRestoreWarning}</p>
+              </div>
+              <p className="database-confirm-instruction">{t.databaseConfirmInstruction.replace("{keyword}", databaseConfirmationKeyword)}</p>
+              <label className="database-confirm-label">
+                <span>{t.databaseConfirmInputLabel}</span>
+                <input
+                  type="text"
+                  value={databaseConfirmation}
+                  onChange={(event) => setDatabaseConfirmation(event.target.value)}
+                  placeholder={t.databaseConfirmPlaceholder}
+                  autoFocus
+                  autoComplete="off"
+                  spellCheck={false}
+                />
+              </label>
+              <div className="confirm-actions database-confirm-actions">
+                <button type="button" className="mini clear-external database-cancel-button" onClick={cancelDatabaseAction} disabled={databaseLoading}>
+                  {t.databaseCancelButton}
+                </button>
+                <button
+                  type="button"
+                  className={pendingDatabaseAction.kind === "delete" ? "danger settings-save-button database-confirm-button" : "primary settings-save-button database-confirm-button"}
+                  onClick={() => void confirmDatabaseAction()}
+                  disabled={!databaseConfirmationMatches || databaseLoading}
+                >
+                  {t.databaseConfirmButton}
+                </button>
+              </div>
             </div>
           </section>
         </div>
