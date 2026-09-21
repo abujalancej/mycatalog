@@ -3656,38 +3656,40 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
       {actionNotice ? (
         <div className="confirm-modal-overlay" onClick={() => setActionNotice(null)}>
           <section className="confirm-modal action-modal" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="action-notice-title">
-            <div className="action-notice-header">
+            <header className="database-confirm-header action-notice-header">
               <h2 id="action-notice-title">{actionNotice.title}</h2>
-            </div>
-            {actionNotice.stats?.length ? (
-              <div className="action-notice-stats">
-                {actionNotice.stats.map((stat) => (
-                  <div className="action-notice-stat" key={`${stat.label}-${stat.value}`}>
-                    <span className="action-notice-stat-icon" aria-hidden="true">
-                      <i className="fa-solid fa-check" />
-                    </span>
-                    <span className="action-notice-stat-label">{stat.label}</span>
-                    <strong className="action-notice-stat-value">{stat.value}</strong>
-                  </div>
-                ))}
+            </header>
+            <div className="database-confirm-body action-modal-body">
+              {actionNotice.stats?.length ? (
+                <div className="action-notice-stats">
+                  {actionNotice.stats.map((stat) => (
+                    <div className="action-notice-stat" key={`${stat.label}-${stat.value}`}>
+                      <span className="action-notice-stat-icon" aria-hidden="true">
+                        <i className="fa-solid fa-check" />
+                      </span>
+                      <span className="action-notice-stat-label">{stat.label}</span>
+                      <strong className="action-notice-stat-value">{stat.value}</strong>
+                    </div>
+                  ))}
+                </div>
+              ) : actionNotice.message ? (
+                <div className="action-notice-message">
+                  <p>{actionNotice.message}</p>
+                </div>
+              ) : null}
+              {actionNotice.details?.length ? (
+                <div className="action-notice-details">
+                  <strong>{t.localizeImagesFailedItems}</strong>
+                  <ul>
+                    {actionNotice.details.map((detail, index) => <li key={`${detail}-${index}`}>{detail}</li>)}
+                  </ul>
+                </div>
+              ) : null}
+              <div className="confirm-actions">
+                <button type="button" className="primary action-notice-close" onClick={() => setActionNotice(null)}>
+                  {t.close}
+                </button>
               </div>
-            ) : actionNotice.message ? (
-              <div className="action-notice-message">
-                <p>{actionNotice.message}</p>
-              </div>
-            ) : null}
-            {actionNotice.details?.length ? (
-              <div className="action-notice-details">
-                <strong>{t.localizeImagesFailedItems}</strong>
-                <ul>
-                  {actionNotice.details.map((detail, index) => <li key={`${detail}-${index}`}>{detail}</li>)}
-                </ul>
-              </div>
-            ) : null}
-            <div className="confirm-actions">
-              <button type="button" className="primary action-notice-close" onClick={() => setActionNotice(null)}>
-                {t.close}
-              </button>
             </div>
           </section>
         </div>
