@@ -700,7 +700,6 @@ const TEXT = {
     actionConfirmed: "Acción confirmada",
     settingsTitle: "Configuración",
     settingsSubtitle: "Modo editor y configuración",
-    applicationVersion: "Versión de la aplicación",
     language: "Language (UI)",
     visibleSections: "Secciones visibles",
     tabOrder: "Orden de pestañas",
@@ -901,7 +900,6 @@ const TEXT = {
     actionConfirmed: "Acció confirmada",
     settingsTitle: "Configuració",
     settingsSubtitle: "Mode editor i configuració",
-    applicationVersion: "Versió de l'aplicació",
     language: "Language (UI)",
     visibleSections: "Seccions visibles",
     tabOrder: "Ordre de pestanyes",
@@ -1102,7 +1100,6 @@ const TEXT = {
     actionConfirmed: "Action confirmed",
     settingsTitle: "Settings",
     settingsSubtitle: "Editor mode and configuration",
-    applicationVersion: "Application version",
     language: "Language (UI)",
     visibleSections: "Visible sections",
     tabOrder: "Tab order",
@@ -3403,11 +3400,6 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
               </div>
             </div>
 
-            <div className="pref-card">
-              <h3>{t.applicationVersion}</h3>
-              <p className="app-version-value">{APP_VERSION}</p>
-            </div>
-
             <div className="pref-card pref-card-wide">
               <h3>{t.visibleSections}</h3>
               <div className="visibility-grid">
@@ -3608,6 +3600,11 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
               {t.saveChanges}
             </button>
           </form>
+
+          <footer className="settings-footer">
+            <span>MyCatalog v{APP_VERSION} by </span>
+            <a href="https://github.com/abujalancej/mycatalog" target="_blank" rel="noreferrer">abujalancej</a>
+          </footer>
 
         </section>
       ) : null}
