@@ -3634,7 +3634,6 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
             </header>
 
             <div className="database-confirm-body">
-              <strong className="delete-confirm-target">{deleteTargetKind} - {pendingDelete?.title}</strong>
               <div className="database-warning-box">
                 <p>{pendingDatabaseAction.kind === "delete" ? t.databaseDeleteWarning : t.databaseRestoreWarning}</p>
               </div>
@@ -3720,6 +3719,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
             </header>
 
             <div className="database-confirm-body">
+              <strong className="delete-confirm-target">{deleteTargetKind} - {pendingDelete?.title}</strong>
               <div className="database-warning-box">
                 <p>{t.deletePrompt}</p>
               </div>
