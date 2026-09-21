@@ -739,6 +739,7 @@ const TEXT = {
     databaseUploadSuccess: "Base de datos restaurada correctamente.",
     databaseDeleteSuccess: "Base de datos y portadas locales borradas correctamente.",
     databaseConfirmTitle: "Confirmar operación de base de datos",
+    databaseDeleteConfirmTitle: "Confirmar eliminación de la base de datos",
     databaseRestoreWarning: "Esta acción sobrescribirá toda la base de datos y reemplazará las imágenes locales actuales.",
     databaseDeleteWarning: "Esta acción vaciará toda la base de datos y borrará las imágenes locales actuales.",
     databaseConfirmInstruction: "Escribe {keyword} para confirmar.",
@@ -944,6 +945,7 @@ const TEXT = {
     databaseUploadSuccess: "Base de dades restaurada correctament.",
     databaseDeleteSuccess: "Base de dades i portades locals esborrades correctament.",
     databaseConfirmTitle: "Confirmar operació de base de dades",
+    databaseDeleteConfirmTitle: "Confirmar eliminació de la base de dades",
     databaseRestoreWarning: "Aquesta acció sobreescriurà tota la base de dades i reemplaçarà les imatges locals actuals.",
     databaseDeleteWarning: "Aquesta acció buidarà tota la base de dades i esborrarà les imatges locals actuals.",
     databaseConfirmInstruction: "Escriu {keyword} per confirmar.",
@@ -1149,6 +1151,7 @@ const TEXT = {
     databaseUploadSuccess: "Database restored successfully.",
     databaseDeleteSuccess: "Database and local artwork deleted successfully.",
     databaseConfirmTitle: "Confirm database operation",
+    databaseDeleteConfirmTitle: "Confirm database deletion",
     databaseRestoreWarning: "This will overwrite the entire database and replace the current local artwork.",
     databaseDeleteWarning: "This will clear the entire database and delete the current local artwork.",
     databaseConfirmInstruction: "Type {keyword} to confirm.",
@@ -3632,7 +3635,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
             <header className="database-confirm-header">
               <div>
                 <p className="database-confirm-eyebrow">{pendingDatabaseAction.kind === "delete" ? t.deleteDatabase : t.uploadDatabase}</p>
-                <h2 id="database-confirm-title">{t.databaseConfirmTitle}</h2>
+                <h2 id="database-confirm-title">{pendingDatabaseAction.kind === "delete" ? t.databaseDeleteConfirmTitle : t.databaseConfirmTitle}</h2>
               </div>
             </header>
 
