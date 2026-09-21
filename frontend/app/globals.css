@@ -2651,6 +2651,13 @@ body {
   background: var(--primary);
 }
 
+.image-editor-actions .file-button.clear-external,
+.image-editor-actions .file-button.clear-external i {
+  border-color: var(--line);
+  background: #fff;
+  color: var(--muted);
+}
+
 .image-url-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
