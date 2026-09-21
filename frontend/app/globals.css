@@ -2635,6 +2635,15 @@ body {
   flex: 0 0 auto;
 }
 
+.image-editor-actions .file-button,
+.image-editor-actions .file-button i {
+  color: #fff;
+}
+
+.image-editor-actions .file-button {
+  background: var(--primary);
+}
+
 .image-url-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
