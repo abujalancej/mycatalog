@@ -695,7 +695,8 @@ const TEXT = {
     delete: "Eliminar",
     cancel: "Cancelar",
     confirmDelete: "Confirmar eliminación",
-    deletePrompt: "Esta acción borrará el elemento de la base de datos.",
+    deleteItem: "Eliminar elemento",
+    deletePrompt: "Esta acción es irreversible y borrará el elemento de la base de datos.",
     deleteMissing: "El elemento no existía en la base de datos. Se ha quitado de la vista.",
     actionConfirmed: "Acción confirmada",
     settingsTitle: "Configuración",
@@ -896,7 +897,8 @@ const TEXT = {
     delete: "Eliminar",
     cancel: "Cancel·lar",
     confirmDelete: "Confirmar eliminació",
-    deletePrompt: "Aquesta acció esborrarà l'element de la base de dades.",
+    deleteItem: "Eliminar element",
+    deletePrompt: "Aquesta acció és irreversible i esborrarà l'element de la base de dades.",
     deleteMissing: "L'element no existia a la base de dades. S'ha tret de la vista.",
     actionConfirmed: "Acció confirmada",
     settingsTitle: "Configuració",
@@ -1097,7 +1099,8 @@ const TEXT = {
     delete: "Delete",
     cancel: "Cancel",
     confirmDelete: "Confirm delete",
-    deletePrompt: "This action will delete the item from the database.",
+    deleteItem: "Delete item",
+    deletePrompt: "This action is irreversible and will delete the item from the database.",
     deleteMissing: "Item was not found in the database. Removed from the view.",
     actionConfirmed: "Action confirmed",
     settingsTitle: "Settings",
@@ -3108,16 +3111,16 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                           <div className="fallback">{t.noCover}</div>
                         )}
                       </button>
+                      {canEdit ? (
+                        <button type="button" className="danger icon-button card-delete-button" onClick={() => requestDelete("music", item)} aria-label={t.delete} title={t.delete}>
+                          <i className="fa-solid fa-trash" aria-hidden="true" />
+                        </button>
+                      ) : null}
                     </div>
                     <div className="album-meta">
                       <h3 className="album-title" title={item.title}>{item.title}</h3>
                       <p className="card-line" title={item.artists?.join(", ") || t.noArtist}>{item.artists?.join(", ") || t.noArtist}</p>
                       <p className="card-line" title={String(item.year ?? "-")}>{item.year ?? "-"}</p>
-                      {canEdit ? (
-                        <button type="button" className="danger icon-button" onClick={() => requestDelete("music", item)} aria-label={t.delete} title={t.delete}>
-                          <i className="fa-solid fa-trash" aria-hidden="true" />
-                        </button>
-                      ) : null}
                     </div>
                   </article>
                 ))}
@@ -3208,17 +3211,17 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                         ) : (
                           <div className="fallback">{t.noPoster}</div>
                         )}
+                        {canEdit ? (
+                          <button type="button" className="danger icon-button card-delete-button" onClick={() => requestDelete("movies", item)} aria-label={t.delete} title={t.delete}>
+                            <i className="fa-solid fa-trash" aria-hidden="true" />
+                          </button>
+                        ) : null}
                       </div>
 
                       <div className="movie-meta">
                         <h3 className="card-line" title={title}>{title}</h3>
                         <p className="card-line" title={movieDirectorLine(item)}>{movieDirectorLine(item)}</p>
                         <p className="card-line" title={normalizeMovieYear(item)}>{normalizeMovieYear(item)}</p>
-                        {canEdit ? (
-                          <button type="button" className="danger icon-button" onClick={() => requestDelete("movies", item)} aria-label={t.delete} title={t.delete}>
-                            <i className="fa-solid fa-trash" aria-hidden="true" />
-                          </button>
-                        ) : null}
                       </div>
                     </article>
                   );
@@ -3345,16 +3348,16 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                             <div className="fallback">{t.noCover}</div>
                           </button>
                         )}
+                        {canEdit ? (
+                          <button type="button" className="danger icon-button card-delete-button" onClick={() => requestDelete("books", item)} aria-label={t.delete} title={t.delete}>
+                            <i className="fa-solid fa-trash" aria-hidden="true" />
+                          </button>
+                        ) : null}
                       </div>
                       <div className="book-meta">
                         <h3 className="card-line" title={item.title}>{item.title}</h3>
                         <p className="card-line" title={bookAuthorLine(item)}>{bookAuthorLine(item)}</p>
                         <p className="card-line" title={bookYear(item)}>{bookYear(item)}</p>
-                        {canEdit ? (
-                          <button type="button" className="danger icon-button" onClick={() => requestDelete("books", item)} aria-label={t.delete} title={t.delete}>
-                            <i className="fa-solid fa-trash" aria-hidden="true" />
-                          </button>
-                        ) : null}
                       </div>
                     </article>
                   );
@@ -3698,17 +3701,24 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
 
       {pendingDelete ? (
         <div className="confirm-modal-overlay" onClick={() => setPendingDelete(null)}>
-          <section className="confirm-modal" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="confirm-delete-title">
-            <h2 id="confirm-delete-title">{t.confirmDelete}</h2>
-            <p>{t.deletePrompt}</p>
-            <strong className="confirm-target">{pendingDelete.title}</strong>
-            <div className="confirm-actions">
-              <button type="button" className="mini clear-external icon-button" onClick={() => setPendingDelete(null)} aria-label={t.cancel} title={t.cancel}>
-                <i className="fa-solid fa-xmark" aria-hidden="true" />
-              </button>
-              <button type="button" className="danger icon-button" onClick={() => void confirmDeleteItem()} aria-label={t.confirmDelete} title={t.confirmDelete}>
-                <i className="fa-solid fa-trash" aria-hidden="true" />
-              </button>
+          <section className="confirm-modal database-confirm-modal is-danger delete-confirm-modal" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="confirm-delete-title">
+            <header className="database-confirm-header">
+              <p className="database-confirm-eyebrow">{t.delete}</p>
+              <h2 id="confirm-delete-title">{t.deleteItem}</h2>
+            </header>
+
+            <div className="database-confirm-body">
+              <div className="database-warning-box">
+                <p>{t.deletePrompt}</p>
+              </div>
+              <div className="confirm-actions database-confirm-actions">
+                <button type="button" className="mini clear-external database-cancel-button" onClick={() => setPendingDelete(null)}>
+                  {t.cancel}
+                </button>
+                <button type="button" className="danger settings-save-button database-confirm-button" onClick={() => void confirmDeleteItem()}>
+                  {t.delete}
+                </button>
+              </div>
             </div>
           </section>
         </div>
