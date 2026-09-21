@@ -892,7 +892,7 @@ body {
 .clear-external.icon-button:not(:disabled):hover,
 .details-close:hover {
   background: var(--surface-soft);
-  color: var(--ink);
+  color: var(--muted);
 }
 
 .danger.icon-button:not(:disabled):hover {
@@ -2679,6 +2679,15 @@ body {
   place-items: center;
   line-height: 1;
   border-radius: 8px;
+}
+
+.image-editor-actions .image-action-button:hover,
+.image-editor-actions .image-action-button:hover i {
+  border-color: rgba(32, 37, 43, 0.28);
+  background: var(--surface-soft);
+  color: var(--muted);
+  box-shadow: 0 8px 18px rgba(15, 16, 18, 0.12);
+  transform: translateY(-1px);
 }
 
 .image-url-row {
