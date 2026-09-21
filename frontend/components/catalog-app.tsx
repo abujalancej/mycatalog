@@ -766,6 +766,7 @@ const TEXT = {
     fileOpened: "Archivo abierto.",
     fileOpenError: "No se pudo abrir el archivo.",
     saveChanges: "Guardar cambios",
+    saveConfigurationChanges: "Guardar cambios de configuración",
     changesSaved: "Cambios guardados.",
     changesError: "No se pudieron guardar los cambios."
   },
@@ -966,6 +967,7 @@ const TEXT = {
     fileOpened: "Fitxer obert.",
     fileOpenError: "No s'ha pogut obrir el fitxer.",
     saveChanges: "Desar canvis",
+    saveConfigurationChanges: "Desar canvis de configuració",
     changesSaved: "Canvis desats.",
     changesError: "No s'han pogut desar els canvis."
   },
@@ -1166,6 +1168,7 @@ const TEXT = {
     fileOpened: "File opened.",
     fileOpenError: "Could not open file.",
     saveChanges: "Save changes",
+    saveConfigurationChanges: "Save configuration changes",
     changesSaved: "Changes saved.",
     changesError: "Could not save changes."
   }
@@ -3594,7 +3597,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
             </div>
 
             <button type="submit" className="primary settings-save-button" disabled={!editorMode}>
-              {t.saveChanges}
+              {t.saveConfigurationChanges}
             </button>
           </form>
 
