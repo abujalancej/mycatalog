@@ -2081,6 +2081,7 @@ body {
 }
 
 .database-cancel-button {
+  width: 10.5rem;
   min-height: 2.35rem;
   padding: 0 0.95rem;
 }
