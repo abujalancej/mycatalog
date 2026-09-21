@@ -1558,7 +1558,7 @@ body {
   height: 2rem;
 }
 
-.action-modal {
+.confirm-modal.action-modal {
   width: min(520px, 100%);
   padding: 0;
   overflow: hidden;
