@@ -44,7 +44,7 @@ type EditableKind = "music" | "movies" | "books";
 type SelectedItem = { kind: "music"; item: MusicItem } | { kind: "movies"; item: MovieItem } | { kind: "books"; item: BookItem } | null;
 type PendingDelete = { kind: "music"; id: number; title: string } | { kind: "movies"; id: number; title: string } | { kind: "books"; id: string; title: string } | null;
 type ActionNoticeStat = { value: string; label: string };
-type ActionNotice = { title: string; message: string; details?: string[]; stats?: ActionNoticeStat[] } | null;
+type ActionNotice = { title: string; message: string; eyebrow?: string; details?: string[]; stats?: ActionNoticeStat[] } | null;
 type PendingDatabaseAction = { kind: "restore"; file: File } | { kind: "delete" } | null;
 type DatabaseOperation = "download" | "restore" | "delete" | null;
 type InconsistencyKindFilter = "all" | "music" | "books";
@@ -1289,8 +1289,8 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
   );
   const visibleTabs = useMemo(() => tabOrder.filter((entry) => sectionVisibility[entry]), [sectionVisibility, tabOrder]);
 
-  function showActionNotice(message: string, details?: string[], stats?: ActionNoticeStat[]) {
-    setActionNotice({ title: t.actionConfirmed, message, details, stats });
+  function showActionNotice(message: string, details?: string[], stats?: ActionNoticeStat[], eyebrow?: string) {
+    setActionNotice({ title: t.actionConfirmed, message, eyebrow, details, stats });
   }
 
   function changeTab(nextTab: Tab) {
@@ -2797,7 +2797,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
       ];
       const failedItems = (payload.failures ?? []).map((failure) => `${failure.label} · ${failure.kind} #${failure.id}`);
       setSettingsStatus(null);
-      showActionNotice("", failedItems.length ? failedItems : undefined, stats);
+      showActionNotice("", failedItems.length ? failedItems : undefined, stats, t.localizeImages);
     } catch {
       setSettingsStatus(t.localizeImagesError);
     } finally {
@@ -3657,6 +3657,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
         <div className="confirm-modal-overlay" onClick={() => setActionNotice(null)}>
           <section className="confirm-modal action-modal" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-labelledby="action-notice-title">
             <header className="database-confirm-header action-notice-header">
+              {actionNotice.eyebrow ? <p className="database-confirm-eyebrow">{actionNotice.eyebrow}</p> : null}
               <h2 id="action-notice-title">{actionNotice.title}</h2>
             </header>
             <div className="database-confirm-body action-modal-body">
@@ -3686,7 +3687,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                 </div>
               ) : null}
               <div className="confirm-actions">
-                <button type="button" className="primary action-notice-close" onClick={() => setActionNotice(null)}>
+                <button type="button" className="mini clear-external action-notice-close" onClick={() => setActionNotice(null)}>
                   {t.close}
                 </button>
               </div>
