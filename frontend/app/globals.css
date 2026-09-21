@@ -861,6 +861,17 @@ body {
   color: #fff;
 }
 
+.details-modal-overlay .track-edit-row .danger.icon-button {
+  border-color: var(--danger) !important;
+  background: var(--danger) !important;
+  color: #fff !important;
+}
+
+.details-modal-overlay .track-edit-row .danger.icon-button .fa-trash,
+.details-modal-overlay .track-edit-row .danger.icon-button .fa-trash-can {
+  color: #fff !important;
+}
+
 .icon-button:not(:disabled):hover,
 .file-button.icon-button:hover,
 .details-close:hover {
@@ -2651,11 +2662,23 @@ body {
   background: var(--primary);
 }
 
-.image-editor-actions .file-button.clear-external,
-.image-editor-actions .file-button.clear-external i {
+.image-editor-actions .image-action-button,
+.image-editor-actions .image-action-button i {
   border-color: var(--line);
   background: #fff;
   color: var(--muted);
+}
+
+.image-editor-actions .image-action-button {
+  width: 2.35rem;
+  min-width: 2.35rem;
+  height: 2.35rem;
+  min-height: 2.35rem;
+  padding: 0;
+  display: inline-grid;
+  place-items: center;
+  line-height: 1;
+  border-radius: 8px;
 }
 
 .image-url-row {

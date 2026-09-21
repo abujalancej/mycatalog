@@ -3772,11 +3772,11 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                     <div className="image-url-row">
                       <label>{t.imageUrl}<input value={musicEditForm.cover} onChange={(event) => setMusicEditForm((prev) => prev ? ({ ...prev, cover: event.target.value }) : prev)} /></label>
                       <div className="image-editor-actions">
-                        <label className="file-button clear-external icon-button" aria-label={t.imageBrowse} title={t.imageBrowse}>
+                        <label className="file-button clear-external icon-button image-action-button" aria-label={t.imageBrowse} title={t.imageBrowse}>
                           <input type="file" accept="image/*" onChange={(event) => void updateMusicCoverFromFile(event)} />
                           <i className="fa-solid fa-upload" aria-hidden="true" />
                         </label>
-                        <button type="button" className="mini clear-external icon-button" onClick={() => setMusicEditForm((prev) => prev ? ({ ...prev, cover: "" }) : prev)} aria-label={t.clearImage} title={t.clearImage}>
+                        <button type="button" className="mini clear-external icon-button image-action-button" onClick={() => setMusicEditForm((prev) => prev ? ({ ...prev, cover: "" }) : prev)} aria-label={t.clearImage} title={t.clearImage}>
                           <i className="fa-solid fa-eraser" aria-hidden="true" />
                         </button>
                       </div>
@@ -3906,11 +3906,11 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                     <div className="image-url-row">
                       <label>{t.imageUrl}<input value={bookEditForm.cover} onChange={(event) => setBookEditForm((prev) => prev ? ({ ...prev, cover: event.target.value }) : prev)} /></label>
                       <div className="image-editor-actions">
-                        <label className="file-button clear-external icon-button" aria-label={t.imageBrowse} title={t.imageBrowse}>
+                        <label className="file-button clear-external icon-button image-action-button" aria-label={t.imageBrowse} title={t.imageBrowse}>
                           <input type="file" accept="image/*" onChange={(event) => void updateBookCoverFromFile(event)} />
                           <i className="fa-solid fa-folder-open" aria-hidden="true" />
                         </label>
-                        <button type="button" className="mini clear-external icon-button" onClick={() => setBookEditForm((prev) => prev ? ({ ...prev, cover: "" }) : prev)} aria-label={t.clearImage} title={t.clearImage}>
+                        <button type="button" className="mini clear-external icon-button image-action-button" onClick={() => setBookEditForm((prev) => prev ? ({ ...prev, cover: "" }) : prev)} aria-label={t.clearImage} title={t.clearImage}>
                           <i className="fa-solid fa-xmark" aria-hidden="true" />
                         </button>
                       </div>
@@ -3981,11 +3981,11 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                   <div className="image-url-row">
                     <label>{t.imageUrl}<input value={movieEditForm.poster_full} onChange={(event) => setMovieEditForm((prev) => prev ? ({ ...prev, poster_full: event.target.value }) : prev)} /></label>
                     <div className="image-editor-actions">
-                      <label className="file-button clear-external icon-button" aria-label={t.imageBrowse} title={t.imageBrowse}>
+                      <label className="file-button clear-external icon-button image-action-button" aria-label={t.imageBrowse} title={t.imageBrowse}>
                         <input type="file" accept="image/*" onChange={(event) => void updateMoviePosterFromFile(event)} />
                         <i className="fa-solid fa-upload" aria-hidden="true" />
                       </label>
-                      <button type="button" className="mini clear-external icon-button" onClick={() => setMovieEditForm((prev) => prev ? ({ ...prev, poster_full: "" }) : prev)} aria-label={t.clearImage} title={t.clearImage}>
+                      <button type="button" className="mini clear-external icon-button image-action-button" onClick={() => setMovieEditForm((prev) => prev ? ({ ...prev, poster_full: "" }) : prev)} aria-label={t.clearImage} title={t.clearImage}>
                         <i className="fa-solid fa-eraser" aria-hidden="true" />
                       </button>
                     </div>
