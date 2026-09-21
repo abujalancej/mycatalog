@@ -2047,6 +2047,10 @@ body {
   font-weight: 700;
 }
 
+.database-confirm-label-text {
+  font-weight: 700 !important;
+}
+
 .database-confirm-label input {
   width: 100%;
   min-height: 2.55rem;

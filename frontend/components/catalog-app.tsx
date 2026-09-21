@@ -3624,7 +3624,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                 <p>{pendingDatabaseAction.kind === "delete" ? t.databaseDeleteWarning : t.databaseRestoreWarning}</p>
               </div>
               <label className="database-confirm-label">
-                <span>{t.databaseConfirmInputLabel}</span>
+                <span className="database-confirm-label-text">{t.databaseConfirmInputLabel}</span>
                 <input
                   type="text"
                   value={databaseConfirmation}
