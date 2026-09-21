@@ -741,6 +741,7 @@ const TEXT = {
     databaseConfirmInputLabel: "Confirmación",
     databaseConfirmPlaceholder: "Escribe la palabra de confirmación",
     databaseConfirmButton: "Confirmar operación",
+    databaseDeleteConfirmButton: "Borrar",
     databaseCancelButton: "Cancelar",
     databaseRestoreKeyword: "RESTORE",
     databaseDeleteKeyword: "DELETE",
@@ -941,6 +942,7 @@ const TEXT = {
     databaseConfirmInputLabel: "Confirmació",
     databaseConfirmPlaceholder: "Escriu la paraula de confirmació",
     databaseConfirmButton: "Confirmar operació",
+    databaseDeleteConfirmButton: "Esborrar",
     databaseCancelButton: "Cancel·lar",
     databaseRestoreKeyword: "RESTORE",
     databaseDeleteKeyword: "DELETE",
@@ -1141,6 +1143,7 @@ const TEXT = {
     databaseConfirmInputLabel: "Confirmation",
     databaseConfirmPlaceholder: "Type the confirmation word",
     databaseConfirmButton: "Confirm operation",
+    databaseDeleteConfirmButton: "Delete",
     databaseCancelButton: "Cancel",
     databaseRestoreKeyword: "RESTORE",
     databaseDeleteKeyword: "DELETE",
@@ -3646,7 +3649,7 @@ export function CatalogApp({ initialMusic, initialMovies, initialBooks }: Props)
                   onClick={() => void confirmDatabaseAction()}
                   disabled={!databaseConfirmationMatches || databaseLoading}
                 >
-                  {t.databaseConfirmButton}
+                  {pendingDatabaseAction.kind === "delete" ? t.databaseDeleteConfirmButton : t.databaseConfirmButton}
                 </button>
               </div>
             </div>
