@@ -2056,11 +2056,18 @@ body {
   color: var(--ink);
   padding: 0.6rem 0.72rem;
   font: inherit;
+  font-weight: 400;
 }
 
 .database-confirm-label input:focus {
   border-color: #2776a0;
   outline: 3px solid rgba(39, 118, 160, 0.14);
+}
+
+.database-confirm-label input::placeholder {
+  color: var(--muted);
+  font-weight: 400;
+  opacity: 1;
 }
 
 .database-confirm-instruction {
