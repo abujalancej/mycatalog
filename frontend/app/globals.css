@@ -1851,7 +1851,7 @@ body {
   margin-top: 1.1rem;
   color: var(--muted);
   font-size: 0.78rem;
-  text-align: center;
+  text-align: right;
 }
 
 .settings-footer a {
