@@ -32,6 +32,10 @@
       {
         "from": "release/packaging/frontend",
         "to": "frontend"
+      },
+      {
+        "from": "release/packaging/frontend/node_modules",
+        "to": "frontend/node_modules"
       }
     ],
     "directories": {
