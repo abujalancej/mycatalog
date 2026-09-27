@@ -13,7 +13,9 @@ if (!["mac", "win"].includes(target)) {
 const expectedPlatform = target === "mac" ? "darwin" : "win32";
 if (process.platform !== expectedPlatform) {
   console.error(
-    `El target ${target} debe construirse en ${expectedPlatform}; plataforma actual: ${process.platform}.`,
+    target === "mac"
+      ? "El DMG de macOS debe construirse en macOS con `npm run build:mac`."
+      : "El instalador EXE debe construirse en Windows con `npm run build:win`.",
   );
   process.exit(2);
 }

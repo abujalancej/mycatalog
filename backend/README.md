@@ -499,8 +499,8 @@ backend/.venv/bin/python -m pip install -r backend/requirements-build.txt
 
 From the repository root, use `npm run build:mac` on macOS to create a DMG or
 `npm run build:win` on Windows to create an NSIS EXE installer. The backend
-build is native to the target platform, so the Windows command must run on
-Windows (or Windows CI).
+build is native to the target platform, so each command must run on its target
+operating system.
 
 Keep these concerns separate:
 

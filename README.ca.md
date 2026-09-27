@@ -151,23 +151,14 @@ npm run build:win
 El resultat és un instal·lador NSIS `.exe` dins de `release/`. Les dades del
 catàleg es desen a la carpeta de dades de l'usuari, fora de la instal·lació.
 
-Si publiques des de macOS sense una màquina Windows, puja un tag de versió.
-GitHub Actions construeix l'instal·lador en un runner Windows i adjunta l’exe
-a la release:
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-
 ## Aplicació d'escriptori
 
 MyCatalog està dissenyada com una aplicació privada i monousuari d'Electron
-per a macOS, Windows i Linux. El renderer es comunica per HTTP amb el servei
+per a macOS i Windows. El renderer es comunica per HTTP amb el servei
 Flask local. Electron selecciona la icona corresponent a cada plataforma:
 
 ```text
-electron/assets/mycatalog-icon-padded.png   macOS i Linux
+electron/assets/mycatalog-icon-padded.png   macOS
 electron/assets/mycatalog-icon-padded.ico   Windows
 ```
 

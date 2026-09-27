@@ -151,23 +151,14 @@ npm run build:win
 The result is a NSIS `.exe` installer in `release/`. Catalogue data is stored
 in the application user's data directory, outside the installed application.
 
-When releasing from macOS without a Windows machine, push a version tag.
-GitHub Actions builds the installer on a Windows runner and attaches the `.exe`
-to the release:
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-
 ## Desktop application
 
 MyCatalog is designed as a private, single-user Electron application for
-macOS, Windows, and Linux. The renderer talks to the local Flask service over
+macOS and Windows. The renderer talks to the local Flask service over
 HTTP. Electron selects the platform-appropriate application icon:
 
 ```text
-electron/assets/mycatalog-icon-padded.png   macOS and Linux
+electron/assets/mycatalog-icon-padded.png   macOS
 electron/assets/mycatalog-icon-padded.ico   Windows
 ```
 

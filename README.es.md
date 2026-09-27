@@ -152,23 +152,14 @@ El resultado es un instalador NSIS `.exe` dentro de `release/`. Los datos del
 catálogo se guardan en la carpeta de datos de usuario de la aplicación, no
 dentro de la instalación.
 
-Si publicas desde macOS sin una máquina Windows, sube un tag de versión y
-GitHub Actions lo construirá en un runner Windows y adjuntará el `.exe` a la
-release:
-
-```bash
-git tag v1.0.0
-git push origin v1.0.0
-```
-
 ## Aplicación de escritorio
 
 MyCatalog está diseñada como una aplicación privada y monousuario de Electron
-para macOS, Windows y Linux. El renderer se comunica por HTTP con el servicio
+para macOS y Windows. El renderer se comunica por HTTP con el servicio
 Flask local. Electron selecciona el icono correspondiente a cada plataforma:
 
 ```text
-electron/assets/mycatalog-icon-padded.png   macOS y Linux
+electron/assets/mycatalog-icon-padded.png   macOS
 electron/assets/mycatalog-icon-padded.ico   Windows
 ```
 
