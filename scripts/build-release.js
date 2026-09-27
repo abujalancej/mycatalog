@@ -35,7 +35,7 @@ const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 const electronBuilderCommand = process.platform === "win32"
   ? path.join(projectRoot, "node_modules", ".bin", "electron-builder.cmd")
   : path.join(projectRoot, "node_modules", ".bin", "electron-builder");
-const stagingRoot = path.join(projectRoot, "release", "packaging");
+const stagingRoot = path.join(projectRoot, ".build", "packaging");
 const stagedFrontend = path.join(stagingRoot, "frontend");
 const stagedBackend = path.join(stagingRoot, "backend");
 
@@ -80,4 +80,7 @@ fs.copyFileSync(
 );
 
 console.log(`==> Generando instalador ${target}`);
-run(electronBuilderCommand, [target === "mac" ? "--mac" : "--win"]);
+run(electronBuilderCommand, [
+  target === "mac" ? "--mac" : "--win",
+  `-c.directories.output=out/${target}`,
+]);

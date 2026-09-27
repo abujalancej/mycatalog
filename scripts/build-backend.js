@@ -4,7 +4,7 @@ const path = require("node:path");
 
 const projectRoot = path.resolve(__dirname, "..");
 const backendDir = path.join(projectRoot, "backend");
-const pyinstallerConfigDir = path.join(projectRoot, "release", ".pyinstaller");
+const pyinstallerConfigDir = path.join(projectRoot, ".build", "pyinstaller");
 const pythonFromEnvironment = process.env.MYCATALOG_BUILD_PYTHON;
 const venvPython = process.platform === "win32"
   ? path.join(backendDir, ".venv", "Scripts", "python.exe")

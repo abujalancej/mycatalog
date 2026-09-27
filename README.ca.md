@@ -137,7 +137,7 @@ A macOS, genera el DMG amb:
 npm run build:mac
 ```
 
-El resultat queda a `release/MyCatalog-<version>-mac-<arch>.dmg`. La comanda compila el
+El resultat queda a `out/mac/MyCatalog-<version>-mac-<arch>.dmg`. La comanda compila el
 frontend, empaqueta el backend Python amb PyInstaller i crea l'aplicació
 d'Electron.
 
@@ -148,7 +148,7 @@ PyInstaller és específic de la plataforma:
 npm run build:win
 ```
 
-El resultat és `release/MyCatalog-<version>-win-<arch>.exe`. Les dades del
+El resultat és `out/win/MyCatalog-<version>-win-<arch>.exe`. Les dades del
 catàleg es desen a la carpeta de dades de l'usuari, fora de la instal·lació.
 
 ## Aplicació d'escriptori

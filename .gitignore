@@ -2,6 +2,8 @@
 node_modules/
 dist/
 release/
+/out/
+/.build/
 *.log
 
 # Private local catalogue data — keep on this machine only

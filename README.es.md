@@ -138,7 +138,7 @@ En macOS, genera el DMG con:
 npm run build:mac
 ```
 
-El resultado queda en `release/MyCatalog-<version>-mac-<arch>.dmg`. El comando compila el
+El resultado queda en `out/mac/MyCatalog-<version>-mac-<arch>.dmg`. El comando compila el
 frontend, empaqueta el backend Python y crea el instalador Electron.
 
 En Windows, ejecuta el siguiente comando desde Windows (el backend PyInstaller
@@ -148,7 +148,7 @@ es específico de la plataforma):
 npm run build:win
 ```
 
-El resultado es `release/MyCatalog-<version>-win-<arch>.exe`. Los datos del
+El resultado es `out/win/MyCatalog-<version>-win-<arch>.exe`. Los datos del
 catálogo se guardan en la carpeta de datos de usuario de la aplicación, no
 dentro de la instalación.
 

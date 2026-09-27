@@ -27,20 +27,20 @@
     ],
     "extraResources": [
       {
-        "from": "release/packaging/backend",
+        "from": ".build/packaging/backend",
         "to": "backend"
       },
       {
-        "from": "release/packaging/frontend",
+        "from": ".build/packaging/frontend",
         "to": "frontend"
       },
       {
-        "from": "release/packaging/frontend/node_modules",
+        "from": ".build/packaging/frontend/node_modules",
         "to": "frontend/node_modules"
       }
     ],
     "directories": {
-      "output": "release"
+      "output": "out"
     },
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "mac": {
