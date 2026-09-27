@@ -151,11 +151,6 @@ npm run build:win
 The result is a NSIS `.exe` installer in `release/`. Catalogue data is stored
 in the application user's data directory, outside the installed application.
 
-From macOS or Linux, the same command requests the build through GitHub Actions
-on a Windows runner. Commit and push the changes first, install the [GitHub CLI](https://cli.github.com/),
-and run `gh auth login`. Download the `mycatalog-windows-installer` artifact
-from the completed Actions run.
-
 ## Desktop application
 
 MyCatalog is designed as a private, single-user Electron application for
@@ -306,7 +301,7 @@ mycatalog/
 | `npm run build:frontend` | Create a production build of the Next.js renderer. |
 | `npm run build:backend` | Freeze the Python backend with PyInstaller. |
 | `npm run build:mac` | Generate the macOS `.dmg` installer. |
-| `npm run build:win` | Generate the Windows `.exe` on Windows or request a remote build from macOS/Linux. |
+| `npm run build:win` | Generate the Windows `.exe` installer; run it on Windows. |
 | `npm run lint:frontend` | Run the frontend lint command. |
 | `python3 scripts/migrate_json_to_sqlite.py` | Import the JSON catalogues into SQLite. |
 | `python3 scripts/normalize_music_track_positions.py` | Report or normalize music track positions. |
