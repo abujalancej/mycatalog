@@ -1,0 +1,68 @@
+name: Publishing Windows installer
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checking out source
+        uses: actions/checkout@v4
+
+      - name: Setting up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            frontend/package-lock.json
+
+      - name: Setting up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Installing Node.js dependencies
+        run: |
+          npm ci
+          npm --prefix frontend ci
+
+      - name: Installing Python build dependencies
+        run: python -m pip install -r backend/requirements-build.txt
+
+      - name: Building Windows installer
+        run: npm run build:win
+
+      - name: Uploading Windows installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mycatalog-windows-installer
+          path: release/MyCatalog-*-win-*.exe
+          if-no-files-found: error
+
+      - name: Publishing Windows installer
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem -Path 'release\MyCatalog-*-win-*.exe' | Select-Object -First 1
+          if (-not $installer) {
+            throw 'Windows installer not found.'
+          }
+
+          gh release view $env:GITHUB_REF_NAME 2>$null
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload $env:GITHUB_REF_NAME $installer.FullName --clobber
+          } else {
+            gh release create $env:GITHUB_REF_NAME $installer.FullName --generate-notes --title "MyCatalog $env:GITHUB_REF_NAME"
+          }

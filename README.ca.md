@@ -151,6 +151,15 @@ npm run build:win
 El resultat és un instal·lador NSIS `.exe` dins de `release/`. Les dades del
 catàleg es desen a la carpeta de dades de l'usuari, fora de la instal·lació.
 
+Si publiques des de macOS sense una màquina Windows, puja un tag de versió.
+GitHub Actions construeix l'instal·lador en un runner Windows i adjunta l’exe
+a la release:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
 ## Aplicació d'escriptori
 
 MyCatalog està dissenyada com una aplicació privada i monousuari d'Electron

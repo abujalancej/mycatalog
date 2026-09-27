@@ -151,6 +151,15 @@ npm run build:win
 The result is a NSIS `.exe` installer in `release/`. Catalogue data is stored
 in the application user's data directory, outside the installed application.
 
+When releasing from macOS without a Windows machine, push a version tag.
+GitHub Actions builds the installer on a Windows runner and attaches the `.exe`
+to the release:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
 ## Desktop application
 
 MyCatalog is designed as a private, single-user Electron application for
