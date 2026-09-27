@@ -137,7 +137,7 @@ On macOS, generate the DMG with:
 npm run build:mac
 ```
 
-The result is written to `release/MyCatalog-*-mac-*.dmg`. The command builds
+The result is written to `release/MyCatalog-<version>-mac-<arch>.dmg`. The command builds
 the frontend, freezes the Python backend with PyInstaller, and packages the
 Electron application.
 
@@ -148,7 +148,7 @@ specific:
 npm run build:win
 ```
 
-The result is a NSIS `.exe` installer in `release/`. Catalogue data is stored
+The result is `release/MyCatalog-<version>-win-<arch>.exe`. Catalogue data is stored
 in the application user's data directory, outside the installed application.
 
 ## Desktop application
