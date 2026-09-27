@@ -3,7 +3,7 @@
 
 a = Analysis(
     ['server.py'],
-    pathex=[],
+    pathex=['.'],
     binaries=[],
     datas=[],
     hiddenimports=[],
