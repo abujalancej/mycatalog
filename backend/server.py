@@ -42,9 +42,15 @@ from src.tmdb_client import TMDbClient
 
 
 BASE_DIR = Path(__file__).resolve().parent
-COVERS_DIR = BASE_DIR / "covers"
-CATALOG_IMAGES_DIR = BASE_DIR.parent / "frontend" / "public" / "catalog-images"
-REPORTS_DIR = BASE_DIR / "reports"
+DATA_DIR = Path(os.environ.get("MYCATALOG_DATA_DIR", str(BASE_DIR))).expanduser().resolve()
+COVERS_DIR = DATA_DIR / "covers"
+CATALOG_IMAGES_DIR = Path(
+    os.environ.get(
+        "MYCATALOG_ASSET_DIR",
+        str(BASE_DIR.parent / "frontend" / "public" / "catalog-images"),
+    )
+).expanduser().resolve()
+REPORTS_DIR = DATA_DIR / "reports"
 REMOTE_SCHEMES = {"http", "https"}
 DATABASE_UPLOAD_MAX_BYTES = 250 * 1024 * 1024
 BACKUP_ARCHIVE_DATABASE_NAME = "catalog.sqlite3"
@@ -408,13 +414,19 @@ def resolve_backend_path(path_value: str | Path) -> Path:
     path = Path(path_value)
     if path.is_absolute():
         return path
-    return BASE_DIR / path
+    return DATA_DIR / path
 
 
 def is_allowed_backend_path(path: Path, media_apps: dict[str, Any], config_location: Path) -> bool:
     """Return whether a path is safe to reveal from the local backend."""
     resolved = path.resolve()
-    allowed_roots = [BASE_DIR.resolve(), COVERS_DIR.resolve(), REPORTS_DIR.resolve(), config_location.resolve()]
+    allowed_roots = [
+        BASE_DIR.resolve(),
+        DATA_DIR.resolve(),
+        COVERS_DIR.resolve(),
+        REPORTS_DIR.resolve(),
+        config_location.resolve(),
+    ]
     for app in media_apps.values():
         allowed_roots.append(resolve_backend_path(app.storage.path).resolve())
 
@@ -632,7 +644,7 @@ def local_cover_url(path_value: Any) -> str | None:
 
     path = Path(path_value)
     if not path.is_absolute():
-        path = BASE_DIR / path
+        path = DATA_DIR / path
 
     try:
         relative_path = path.resolve().relative_to(COVERS_DIR.resolve())
@@ -696,7 +708,9 @@ def create_app(config_path: str | Path | None = None) -> Flask:
     if not logging.getLogger().handlers:
         logging.basicConfig(level=logging.INFO)
 
-    config_location = Path(config_path) if config_path else BASE_DIR / "config.yaml"
+    config_location = Path(config_path) if config_path else Path(
+        os.environ.get("MYCATALOG_CONFIG_PATH", str(DATA_DIR / "config.yaml"))
+    )
     config = load_config(config_location)
 
     try:
@@ -1215,7 +1229,7 @@ def create_app(config_path: str | Path | None = None) -> Flask:
         if not database_path.is_file():
             return jsonify({"error": "database not found"}), 404
 
-        backup_directory = BASE_DIR / "var"
+        backup_directory = DATA_DIR / "var"
         backup_directory.mkdir(parents=True, exist_ok=True)
         temporary_database_file = tempfile.NamedTemporaryFile(
             dir=backup_directory,
@@ -1263,7 +1277,7 @@ def create_app(config_path: str | Path | None = None) -> Flask:
 
         database_path = resolve_backend_path(media_apps["album"].storage.path)
         database_path.parent.mkdir(parents=True, exist_ok=True)
-        backup_directory = BASE_DIR / "var"
+        backup_directory = DATA_DIR / "var"
         backup_directory.mkdir(parents=True, exist_ok=True)
         temporary_file = tempfile.NamedTemporaryFile(
             dir=backup_directory,
@@ -1336,7 +1350,7 @@ def create_app(config_path: str | Path | None = None) -> Flask:
             db_path=storage_path,
             report_path=report_path,
             apply=False,
-            base_dir=BASE_DIR,
+            base_dir=DATA_DIR,
         )
         book_payload = detect_storage_inconsistencies(
             media_apps,

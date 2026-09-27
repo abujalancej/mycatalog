@@ -2,6 +2,7 @@
 
 import logging
 import json
+import os
 from pathlib import Path
 from typing import Any
 from src.tmdb_client import TMDbClient
@@ -15,8 +16,9 @@ from src.movie_metadata import (
 )
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-COVERS_DIR = BASE_DIR / "covers" / "movies"
-REJECTED_PATH = BASE_DIR / "var" / "rejected_movies.json"
+DATA_DIR = Path(os.environ.get("MYCATALOG_DATA_DIR", str(BASE_DIR))).expanduser().resolve()
+COVERS_DIR = DATA_DIR / "covers" / "movies"
+REJECTED_PATH = DATA_DIR / "var" / "rejected_movies.json"
 
 
 class MovieApp:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 import re
 import unicodedata
 from pathlib import Path
@@ -18,7 +19,8 @@ from src.openlibrary_client import OpenLibraryClient
 from src.storage import Storage
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-COVERS_DIR = BASE_DIR / "covers" / "books"
+DATA_DIR = Path(os.environ.get("MYCATALOG_DATA_DIR", str(BASE_DIR))).expanduser().resolve()
+COVERS_DIR = DATA_DIR / "covers" / "books"
 REMOTE_SCHEMES = {"http", "https"}
 
 

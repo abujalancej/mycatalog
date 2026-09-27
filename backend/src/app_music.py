@@ -2,6 +2,7 @@
 
 import logging
 import json
+import os
 from pathlib import Path
 from src.discogs_client import DiscogsClient
 from src.storage import Storage
@@ -10,8 +11,9 @@ from src.music_metadata import DEFAULT_MUSIC_PACKAGING, DEFAULT_MUSIC_RELEASE_TY
 from src.music_track_positions import normalize_tracklist
 
 BASE_DIR = Path(__file__).resolve().parents[1]
-COVERS_DIR = BASE_DIR / "covers" / "music"
-REJECTED_FILE = BASE_DIR / "var" / "rejected_music.json"
+DATA_DIR = Path(os.environ.get("MYCATALOG_DATA_DIR", str(BASE_DIR))).expanduser().resolve()
+COVERS_DIR = DATA_DIR / "covers" / "music"
+REJECTED_FILE = DATA_DIR / "var" / "rejected_music.json"
 
 
 class MusicApp:

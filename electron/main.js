@@ -1,5 +1,6 @@
 const { app, BrowserWindow, dialog } = require("electron");
 const { spawn } = require("node:child_process");
+const fs = require("node:fs");
 const http = require("node:http");
 const net = require("node:net");
 const path = require("node:path");
@@ -7,8 +8,12 @@ const path = require("node:path");
 const BACKEND_START_PORT = 5000;
 const FRONTEND_START_PORT = 3000;
 const projectRoot = path.resolve(__dirname, "..");
-const backendDir = path.join(projectRoot, "backend");
-const frontendDir = path.join(projectRoot, "frontend");
+const isPackaged = app.isPackaged;
+const sourceBackendDir = path.join(projectRoot, "backend");
+const sourceFrontendDir = path.join(projectRoot, "frontend");
+const resourcesRoot = isPackaged ? process.resourcesPath : projectRoot;
+const packagedBackendDir = path.join(resourcesRoot, "backend");
+const packagedFrontendDir = path.join(resourcesRoot, "frontend");
 const isDevelopment = process.argv.includes("--dev");
 
 let mainWindow;
@@ -26,8 +31,8 @@ function pythonCommand() {
   }
 
   const venvPython = process.platform === "win32"
-    ? path.join(backendDir, ".venv", "Scripts", "python.exe")
-    : path.join(backendDir, ".venv", "bin", "python");
+    ? path.join(sourceBackendDir, ".venv", "Scripts", "python.exe")
+    : path.join(sourceBackendDir, ".venv", "bin", "python");
 
   return require("node:fs").existsSync(venvPython)
     ? venvPython
@@ -152,7 +157,7 @@ async function startDevelopmentServers() {
     pythonCommand(),
     ["server.py"],
     {
-      cwd: backendDir,
+      cwd: sourceBackendDir,
       env: {
         PYTHONUNBUFFERED: "1",
         MYCATALOG_PORT: String(backendPort)
@@ -169,8 +174,76 @@ async function startDevelopmentServers() {
     npmCommand(),
     ["run", "dev", "--", "-H", "127.0.0.1", "-p", String(frontendPort)],
     {
-      cwd: frontendDir,
+      cwd: sourceFrontendDir,
       env: { CATALOG_BACKEND_URL: backendUrl }
+    },
+    "frontend"
+  );
+
+  await waitForHttp(`http://127.0.0.1:${frontendPort}/favicon.ico`, "Frontend", 60_000, frontendProcess);
+
+  return `http://127.0.0.1:${frontendPort}`;
+}
+
+function ensurePackagedDataDirectory() {
+  const dataDir = path.join(app.getPath("userData"), "data");
+  fs.mkdirSync(dataDir, { recursive: true });
+
+  const configPath = path.join(dataDir, "config.yaml");
+  const templatePath = path.join(packagedBackendDir, "config.example.yaml");
+  if (!fs.existsSync(configPath) && fs.existsSync(templatePath)) {
+    fs.copyFileSync(templatePath, configPath);
+  }
+
+  return dataDir;
+}
+
+async function startPackagedServers() {
+  const backendPort = await findFreePort(BACKEND_START_PORT);
+  const frontendPort = await findFreePort(FRONTEND_START_PORT);
+  const backendUrl = `http://127.0.0.1:${backendPort}`;
+  const dataDir = ensurePackagedDataDirectory();
+  const backendExecutable = path.join(
+    packagedBackendDir,
+    process.platform === "win32" ? "mycatalogue-backend.exe" : "mycatalogue-backend"
+  );
+
+  if (!fs.existsSync(backendExecutable)) {
+    throw new Error(`No se encuentra el backend empaquetado: ${backendExecutable}`);
+  }
+
+  console.log(`[desktop] backend: ${backendUrl}`);
+  console.log(`[desktop] frontend: http://127.0.0.1:${frontendPort}`);
+
+  backendProcess = startProcess(
+    backendExecutable,
+    [],
+    {
+      cwd: dataDir,
+      env: {
+        PYTHONUNBUFFERED: "1",
+        MYCATALOG_PORT: String(backendPort),
+        MYCATALOG_DATA_DIR: dataDir,
+        MYCATALOG_CONFIG_PATH: path.join(dataDir, "config.yaml")
+      }
+    },
+    "backend"
+  );
+
+  await waitForHttp(`${backendUrl}/health`, "Backend", 60_000, backendProcess);
+
+  frontendProcess = startProcess(
+    process.execPath,
+    [path.join(packagedFrontendDir, "server.js")],
+    {
+      cwd: packagedFrontendDir,
+      env: {
+        ELECTRON_RUN_AS_NODE: "1",
+        NODE_ENV: "production",
+        HOSTNAME: "127.0.0.1",
+        PORT: String(frontendPort),
+        CATALOG_BACKEND_URL: backendUrl
+      }
     },
     "frontend"
   );
@@ -238,11 +311,9 @@ function stopServers() {
 }
 
 async function startApplication() {
-  if (!isDevelopment) {
-    throw new Error("La versión empaquetada todavía no está configurada. Usa `npm run dev`.");
-  }
-
-  const url = await startDevelopmentServers();
+  const url = isDevelopment || !isPackaged
+    ? await startDevelopmentServers()
+    : await startPackagedServers();
   createWindow(url);
 }
 
