@@ -123,8 +123,34 @@ Genera una compilación local del renderer de Next.js:
 npm run build:frontend
 ```
 
-El empaquetado de Electron todavía no está configurado. Por ahora, el flujo
-de escritorio compatible es el comando de desarrollo local anterior.
+Para generar instaladores de escritorio necesitas instalar las dependencias de
+Node y PyInstaller:
+
+```bash
+npm install
+npm --prefix frontend install
+backend/.venv/bin/python -m pip install -r backend/requirements-build.txt
+```
+
+En macOS, genera el DMG con:
+
+```bash
+npm run build:mac
+```
+
+El resultado queda en `release/MyCatalog-*-mac-*.dmg`. El comando compila el
+frontend, empaqueta el backend Python y crea el instalador Electron.
+
+En Windows, ejecuta el siguiente comando desde Windows (el backend PyInstaller
+es específico de la plataforma):
+
+```bash
+npm run build:win
+```
+
+El resultado es un instalador NSIS `.exe` dentro de `release/`. Los datos del
+catálogo se guardan en la carpeta de datos de usuario de la aplicación, no
+dentro de la instalación.
 
 ## Aplicación de escritorio
 
@@ -266,6 +292,9 @@ mycatalog/
 | --- | --- |
 | `npm run dev` | Inicia el backend, el frontend y el shell de Electron. |
 | `npm run build:frontend` | Genera una compilación de producción del renderer de Next.js. |
+| `npm run build:backend` | Compila el backend Python con PyInstaller. |
+| `npm run build:mac` | Genera el instalador `.dmg` de macOS. |
+| `npm run build:win` | Genera el instalador `.exe` de Windows; ejecútalo en Windows. |
 | `npm run lint:frontend` | Ejecuta el lint del frontend. |
 | `python3 scripts/migrate_json_to_sqlite.py` | Importa los catálogos JSON en SQLite. |
 | `python3 scripts/normalize_music_track_positions.py` | Informa o normaliza las posiciones de las pistas. |

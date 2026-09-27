@@ -123,8 +123,33 @@ Build the Next.js renderer locally:
 npm run build:frontend
 ```
 
-The Electron packaging workflow is not configured yet. The supported desktop
-workflow at this stage is the local development command above.
+Install the packaging dependencies:
+
+```bash
+npm install
+npm --prefix frontend install
+backend/.venv/bin/python -m pip install -r backend/requirements-build.txt
+```
+
+On macOS, generate the DMG with:
+
+```bash
+npm run build:mac
+```
+
+The result is written to `release/MyCatalog-*-mac-*.dmg`. The command builds
+the frontend, freezes the Python backend with PyInstaller, and packages the
+Electron application.
+
+On Windows, run this on Windows because the PyInstaller backend is platform
+specific:
+
+```bash
+npm run build:win
+```
+
+The result is a NSIS `.exe` installer in `release/`. Catalogue data is stored
+in the application user's data directory, outside the installed application.
 
 ## Desktop application
 
@@ -274,6 +299,9 @@ mycatalog/
 | --- | --- |
 | `npm run dev` | Start the backend, frontend, and Electron shell. |
 | `npm run build:frontend` | Create a production build of the Next.js renderer. |
+| `npm run build:backend` | Freeze the Python backend with PyInstaller. |
+| `npm run build:mac` | Generate the macOS `.dmg` installer. |
+| `npm run build:win` | Generate the Windows `.exe` installer; run it on Windows. |
 | `npm run lint:frontend` | Run the frontend lint command. |
 | `python3 scripts/migrate_json_to_sqlite.py` | Import the JSON catalogues into SQLite. |
 | `python3 scripts/normalize_music_track_positions.py` | Report or normalize music track positions. |

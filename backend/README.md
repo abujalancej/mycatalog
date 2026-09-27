@@ -470,9 +470,9 @@ Start this backend first, then configure the frontend with:
 CATALOG_BACKEND_URL=http://127.0.0.1:5000
 ```
 
-## Desktop Packaging Direction
+## Desktop Packaging
 
-The expected desktop architecture is:
+The desktop architecture is:
 
 ```text
 Electron app
@@ -483,34 +483,29 @@ Electron app
     `-- downloaded cover images
 ```
 
-Recommended packaging flow:
+The packaging flow is implemented from the repository root:
 
-1. Build the Next.js UI in `mycatalogue.ui`.
+1. Build the Next.js UI in `frontend/`.
 2. Bundle this backend into a standalone executable with PyInstaller.
-3. Include that backend executable as an Electron extra resource.
-4. Start the backend from Electron on app launch.
-5. Point the UI to the local backend URL, for example
-   `http://127.0.0.1:<port>`.
-6. Store user data outside the application install directory.
+3. Include that executable and the Next.js standalone server as Electron extra resources.
+4. Start both services from Electron on app launch.
+5. Store user data in the operating system's application data directory.
 
-For the Python backend executable, use `requirements.txt` during the build:
+Install the build dependency with:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-pip install pyinstaller
-pyinstaller --onefile server.py --name mycatalogue-backend
+backend/.venv/bin/python -m pip install -r backend/requirements-build.txt
 ```
 
-For a production desktop app, avoid hardcoding writable paths inside the app
-bundle. Configure `storage` paths so `db/*.json`, `covers/`, and local settings
-live in a user-writable application data directory.
+From the repository root, use `npm run build:mac` on macOS to create a DMG or
+`npm run build:win` on Windows to create an NSIS EXE installer. The backend
+build is native to the target platform, so the Windows command must run on
+Windows (or Windows CI).
 
 Keep these concerns separate:
 
 - Python backend dependencies: `requirements.txt`
-- Electron and Next.js dependencies: `package.json` in `mycatalogue.ui`
+- Electron and Next.js dependencies: `package.json` files in the repository root and `frontend/`
 - User data: app data directory, not the Git repo and not the installed app
 - API credentials: local configuration or encrypted app settings
 

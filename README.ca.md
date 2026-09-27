@@ -123,8 +123,33 @@ Genera una compilació local del renderer de Next.js:
 npm run build:frontend
 ```
 
-L'empaquetament d'Electron encara no està configurat. De moment, el flux
-d'escriptori compatible és la comanda de desenvolupament local anterior.
+Instal·la les dependències d'empaquetament:
+
+```bash
+npm install
+npm --prefix frontend install
+backend/.venv/bin/python -m pip install -r backend/requirements-build.txt
+```
+
+A macOS, genera el DMG amb:
+
+```bash
+npm run build:mac
+```
+
+El resultat queda a `release/MyCatalog-*-mac-*.dmg`. La comanda compila el
+frontend, empaqueta el backend Python amb PyInstaller i crea l'aplicació
+d'Electron.
+
+A Windows, executa aquesta comanda des de Windows perquè el backend de
+PyInstaller és específic de la plataforma:
+
+```bash
+npm run build:win
+```
+
+El resultat és un instal·lador NSIS `.exe` dins de `release/`. Les dades del
+catàleg es desen a la carpeta de dades de l'usuari, fora de la instal·lació.
 
 ## Aplicació d'escriptori
 
@@ -266,6 +291,9 @@ mycatalog/
 | --- | --- |
 | `npm run dev` | Inicia el backend, el frontend i el shell d'Electron. |
 | `npm run build:frontend` | Genera una compilació de producció del renderer de Next.js. |
+| `npm run build:backend` | Empaqueta el backend Python amb PyInstaller. |
+| `npm run build:mac` | Genera l'instal·lador `.dmg` de macOS. |
+| `npm run build:win` | Genera l'instal·lador `.exe` de Windows; cal executar-lo a Windows. |
 | `npm run lint:frontend` | Executa el lint del frontend. |
 | `python3 scripts/migrate_json_to_sqlite.py` | Importa els catàlegs JSON a SQLite. |
 | `python3 scripts/normalize_music_track_positions.py` | Informa o normalitza les posicions de les pistes. |
