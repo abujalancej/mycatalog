@@ -9,7 +9,8 @@
     "build:frontend": "npm --prefix frontend run build",
     "build:backend": "node scripts/build-backend.js",
     "build:mac": "node scripts/build-release.js mac",
-    "build:win": "node scripts/build-release.js win",
+    "build:win": "node scripts/build-windows.js",
+    "build:win:local": "node scripts/build-release.js win",
     "lint:frontend": "npm --prefix frontend run lint"
   },
   "devDependencies": {

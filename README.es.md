@@ -152,6 +152,11 @@ El resultado es un instalador NSIS `.exe` dentro de `release/`. Los datos del
 catálogo se guardan en la carpeta de datos de usuario de la aplicación, no
 dentro de la instalación.
 
+Desde macOS o Linux, el mismo comando solicita el build a GitHub Actions en un
+runner Windows. Antes confirma y sube los cambios, instala [GitHub CLI](https://cli.github.com/)
+y ejecuta `gh auth login`. Cuando termine, descarga el artefacto
+`mycatalog-windows-installer` desde la ejecución de Actions.
+
 ## Aplicación de escritorio
 
 MyCatalog está diseñada como una aplicación privada y monousuario de Electron
@@ -294,7 +299,7 @@ mycatalog/
 | `npm run build:frontend` | Genera una compilación de producción del renderer de Next.js. |
 | `npm run build:backend` | Compila el backend Python con PyInstaller. |
 | `npm run build:mac` | Genera el instalador `.dmg` de macOS. |
-| `npm run build:win` | Genera el instalador `.exe` de Windows; ejecútalo en Windows. |
+| `npm run build:win` | Genera el instalador `.exe` en Windows o solicita el build remoto desde macOS/Linux. |
 | `npm run lint:frontend` | Ejecuta el lint del frontend. |
 | `python3 scripts/migrate_json_to_sqlite.py` | Importa los catálogos JSON en SQLite. |
 | `python3 scripts/normalize_music_track_positions.py` | Informa o normaliza las posiciones de las pistas. |

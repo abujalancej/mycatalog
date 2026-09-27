@@ -151,6 +151,11 @@ npm run build:win
 El resultat és un instal·lador NSIS `.exe` dins de `release/`. Les dades del
 catàleg es desen a la carpeta de dades de l'usuari, fora de la instal·lació.
 
+Des de macOS o Linux, la mateixa comanda sol·licita el build a GitHub Actions
+en un runner Windows. Confirma i puja els canvis abans, instal·la [GitHub CLI](https://cli.github.com/)
+i executa `gh auth login`. Quan finalitzi, descarrega l'artefacte
+`mycatalog-windows-installer` de l'execució d'Actions.
+
 ## Aplicació d'escriptori
 
 MyCatalog està dissenyada com una aplicació privada i monousuari d'Electron
@@ -293,7 +298,7 @@ mycatalog/
 | `npm run build:frontend` | Genera una compilació de producció del renderer de Next.js. |
 | `npm run build:backend` | Empaqueta el backend Python amb PyInstaller. |
 | `npm run build:mac` | Genera l'instal·lador `.dmg` de macOS. |
-| `npm run build:win` | Genera l'instal·lador `.exe` de Windows; cal executar-lo a Windows. |
+| `npm run build:win` | Genera l'instal·lador `.exe` a Windows o sol·licita el build remot des de macOS/Linux. |
 | `npm run lint:frontend` | Executa el lint del frontend. |
 | `python3 scripts/migrate_json_to_sqlite.py` | Importa els catàlegs JSON a SQLite. |
 | `python3 scripts/normalize_music_track_positions.py` | Informa o normalitza les posicions de les pistes. |
